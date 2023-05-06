@@ -34,7 +34,7 @@ const ConfirmDelModal: FC<ConfirmDelModalProps> = ({setToggleDeleteModal, params
                             No, cancel
                         </button>
                         <button type="submit" onClick={()=>deleteCustomer()} className="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300">
-                            Yes, I'm sure
+                            Yes, I&apos;m sure
                         </button>
                     </div>
                 </div>
