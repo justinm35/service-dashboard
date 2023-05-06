@@ -17,7 +17,7 @@ const SideNav: FC<SideNavProps> = ({}) => {
   const router = useRouter()
   const [userInfo, setUserInfo] = useState<any>()  
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
   // useEffect(() => {
   //   if (!user.uid) {
   //     router.push("/");
@@ -26,10 +26,10 @@ const SideNav: FC<SideNavProps> = ({}) => {
   //   }
   // },[router, user])
 
-    // const auth = getAuth();
-    // useEffect(() => {
-    //   onAuthStateChanged(auth, (user) => {if(user){setUserInfo(user)}else{router.push('/')}})
-    // },[])
+  //   const auth = getAuth();
+  //   useEffect(() => {
+  //     onAuthStateChanged(auth, (user) => {if(user){setUserInfo(user)}else{router.push('/')}})
+  //   },[])
     const [showSidebar, setShowSidebar] = useState<boolean>(false)
     const [signOutLoading, setSignOutLoading] = useState<boolean>(false)
 
