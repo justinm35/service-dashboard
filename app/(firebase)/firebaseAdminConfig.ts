@@ -28,24 +28,24 @@ import { getAuth } from "firebase-admin/auth";
 // }
 
 
-const credentials: ServiceAccount = {
-  projectId: process.env.PROJECT_ID,
-  clientEmail: process.env.CLIENT_EMAIL,
-  privateKey: process.env.PRIVATE_KEY,
-}
+// const credentials: ServiceAccount = {
+//   projectId: process.env.PROJECT_ID,
+//   clientEmail: process.env.CLIENT_EMAIL,
+//   privateKey: process.env.PRIVATE_KEY,
+// }
 
-const options: AppOptions = {
-  credential: cert(credentials),
-};
+// const options: AppOptions = {
+//   credential: cert(credentials),
+// };
 
 
-function createFirebaseAdminApp(config : AppOptions) {
+function createFirebaseAdminApp() {
   if(getApps().length === 0) {
     return initializeApp({
                 credential: admin.credential.cert({
                   projectId: process.env.PROJECT_ID,
                   clientEmail: process.env.CLIENT_EMAIL,
-                  privateKey: process.env.PRIVATE_KEY,
+                  privateKey: process.env.PRIVATE_KEY?.replace(/\\n/g, "\n"),
                 }),
               });
   } else {
@@ -54,5 +54,5 @@ function createFirebaseAdminApp(config : AppOptions) {
 }
 
 
-const firebaseAdmin = createFirebaseAdminApp(options);
+const firebaseAdmin = createFirebaseAdminApp();
 export const adminAuth = getAuth(firebaseAdmin);
