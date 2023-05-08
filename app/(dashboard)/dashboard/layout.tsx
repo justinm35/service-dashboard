@@ -14,24 +14,24 @@ interface layoutProps {
 
 const layout = async ({children} : layoutProps) => {
 
-  await initAdmin()
-  const nextCookies = cookies();
-  const token = nextCookies.get('cookieKey')
-  let session;
-  if(!token) {
-    redirect('/auth')}
-  if(token?.value) {
-    await admin.auth().verifyIdToken(token?.value)
-      .then((decodedToken) => {
-        session = decodedToken
-        if(!session?.uid) {
-          redirect('/auth')
-        }
-      }).catch((err) => {
-        console.log(err)
-        redirect('/auth')
-      })
-  }
+  // await initAdmin()
+  // const nextCookies = cookies();
+  // const token = nextCookies.get('cookieKey')
+  // let session;
+  // if(!token) {
+  //   redirect('/auth')}
+  // if(token?.value) {
+  //   await admin.auth().verifyIdToken(token?.value)
+  //     .then((decodedToken) => {
+  //       session = decodedToken
+  //       if(!session?.uid) {
+  //         redirect('/auth')
+  //       }
+  //     }).catch((err) => {
+  //       console.log(err)
+  //       redirect('/auth')
+  //     })
+  // }
 
 
   return (
