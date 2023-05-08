@@ -19,10 +19,6 @@ const SideNav: FC<SideNavProps> = ({}) => {
   const [userInfo, setUserInfo] = useState<any>()  
 
 
-    const auth = getAuth();
-    useEffect(() => {
-      onAuthStateChanged(auth, (user) => {if(user){setUserInfo(user)}})
-    },[])
 
     const [showSidebar, setShowSidebar] = useState<boolean>(true)
     const [signOutLoading, setSignOutLoading] = useState<boolean>(false)
