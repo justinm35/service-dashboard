@@ -19,7 +19,6 @@ const SideNav: FC<SideNavProps> = ({}) => {
   const [userInfo, setUserInfo] = useState<any>()  
 
 
-
     const [showSidebar, setShowSidebar] = useState<boolean>(true)
     const [signOutLoading, setSignOutLoading] = useState<boolean>(false)
 
