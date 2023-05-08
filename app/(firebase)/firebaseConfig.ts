@@ -15,15 +15,8 @@ const firebaseConfig = {
 
 
 let firebase_app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+
 const db = getFirestore(firebase_app)
 // const analytics = getAnalytics(firebase_app);
-
-// admin.initializeApp({
-//   credential: admin.credential.cert({
-//     projectId: process.env.PROJECT_ID,
-//     clientEmail: process.env.CLIENT_EMAIL,
-//     privateKey: process.env.PRIVATE_KEY
-//   })
-// });
 
 export { firebase_app, db }

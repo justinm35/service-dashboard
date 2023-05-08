@@ -1,6 +1,6 @@
 import { firebase_app } from "./firebaseConfig";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut as signOutSession } from "firebase/auth";
-
+import { setCookie, deleteCookie } from "cookies-next";
 
 export const auth = getAuth(firebase_app);
 
@@ -16,15 +16,18 @@ export async function signUp(email : string, password : string) {
 }
 
 export async function signIn(email: string, password: string) {
-    let result = null,
-        error = null;
-    try {
-        result = await signInWithEmailAndPassword(auth, email, password);
-    } catch (e) {
-        error = e;
-    }
-
-    return { result, error };
+    return signInWithEmailAndPassword(auth, email, password)
+        .then((result) => {
+            return result.user.getIdToken()
+        })
+        .then((token) => {
+            setCookie('cookieKey', token, {maxAge: 60 * 6 * 24 })
+            return('success')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    
 }
 
 export async function signOut() {
@@ -32,9 +35,9 @@ export async function signOut() {
         error = null;
     try {
         result = await signOutSession(auth) 
+        deleteCookie('cookieKey')
     } catch (e) {
         error = e
     }
-console.log(result)
     return { result, error };
 }

@@ -5,5 +5,15 @@ interface IClient {
     email: string,
     serviceDue : boolean,
     visits: string[],
-    phone: string
+    phone: string,
+    notes: string
+}
+
+interface IProduct {
+    id?: string
+    image?: string,
+    manualLink?: string,
+    modelNum: string,
+    name: string,
+    warrantyLink?: string,
 }

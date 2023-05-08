@@ -31,12 +31,12 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
   return (
     <section className="">
     <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-    <h2 className='font-semibold text-2xl text-gray-500 pb-6'>Add a new customer</h2>
+    <h2 className='font-semibold text-2xl text-gray-500 pb-6'>Add a new product</h2>
         <form>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <div className="w-full">
-                    <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900">First Name</label>
-                    <input value={formData.firstName} onChange={handleChange} type="text" name="firstName" id="firstName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Jane" />
+                    <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900">Item Name</label>
+                    <input value={formData.name} onChange={handleChange} type="text" name="firstName" id="firstName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="XYZ Lift" />
                 </div>
                 <div className="w-full">
                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Last Name</label>
@@ -50,7 +50,7 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
                     <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Phone Number</label>
                     <input value={formData.phone} onChange={handleChange} name="phone" id="phone" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="444-444-4444" />
                 </div>
-                {/* <div>
+                <div>
                     <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
                     <select id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
                         <option value="12">Select category</option>
@@ -59,7 +59,7 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
                         <option value="GA">Gaming/Console</option>
                         <option value="PH">Phones</option>
                     </select>
-                </div> */}
+                </div>
                 <div className="sm:col-span-2">
                     <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900">Notes</label>
                     <textarea id="notes" value={formData.notes} onChange={(e)=>setFormData({...formData, "notes" : e.target.value  })} rows={8} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Any customer notes here"></textarea>

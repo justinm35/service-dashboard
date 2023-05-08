@@ -31,7 +31,7 @@ const UserTableItem = ({client} : {client : IClient}) => {
                 Good
             </span> }
           </td>
-          <td className="px-6 py-4">{client.visits.length}</td>
+          <td className="px-6 py-4">{client?.visits?.length}</td>
           <td className="px-6 py-4">
             <div className="flex gap-2">
               3

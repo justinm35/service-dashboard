@@ -8,6 +8,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { notFound, useRouter } from 'next/navigation'
 import AuthProvider, { useAuth } from '../helpers/AuthProvider'
 import Link from 'next/link'
+import { Bars3Icon } from '@heroicons/react/24/solid'
 
 interface SideNavProps {
   
@@ -17,31 +18,34 @@ const SideNav: FC<SideNavProps> = ({}) => {
   const router = useRouter()
   const [userInfo, setUserInfo] = useState<any>()  
 
-  const { user } = useAuth();
-  useEffect(() => {
-    if (!user.uid) {
-      router.push("/");
-    }else{
-      setUserInfo(user)
-    }
-  },[router, user])
 
     const auth = getAuth();
     useEffect(() => {
-      onAuthStateChanged(auth, (user) => {if(user){setUserInfo(user)}else{router.push('/')}})
+      onAuthStateChanged(auth, (user) => {if(user){setUserInfo(user)}})
     },[])
-    const [showSidebar, setShowSidebar] = useState<boolean>(false)
+
+    const [showSidebar, setShowSidebar] = useState<boolean>(true)
     const [signOutLoading, setSignOutLoading] = useState<boolean>(false)
 
 
     const signOutUser = async() => {
       setSignOutLoading(true)
-      const result = signOut()
+      signOut()
+      .then(()=> {
+        setSignOutLoading(false)
+        router.refresh()
+        router.push('/')
+      }).catch(() => {
+          console.log('signout error')
+      })
+
+
+
     }
 
     return (
-    <div className="fixed flex flex-col top-0 left-0 w-full lg:w-64 bg-white h-full border-r text-gray-800 z-10">
-      <div className="flex items-center justify-center h-fit border-b pl-3">
+    <div className="fixed flex flex-col top-0 left-0 w-full lg:w-64 h-auto lg:h-full border-r text-gray-800 z-10">
+      <div className="flex items-center justify-center h-fit border-b pl-3 bg-white">
         <div className='w-full flex items-center space-x-2 py-3'>
           <Link href="/dashboard" className='w-full flex items-center space-x-2'>
             <div className='w-10 h-10 relative'>
@@ -50,10 +54,15 @@ const SideNav: FC<SideNavProps> = ({}) => {
             <h2 className='font-bold'>Service Dashboard</h2>
             </Link>
         </div>
-        <div></div>
+        <div className='block lg:hidden'>
+          <button className='p-3' onClick={()=>setShowSidebar(!showSidebar)}>
+            <Bars3Icon className='w-6 h-6'/>
+          </button>
+        </div>
       </div>
 
-      <div className="overflow-y-auto overflow-x-hidden flex-grow flex justify-between flex-col">
+      {showSidebar ? 
+      <div className="overflow-y-auto overflow-x-hidden flex-grow flex justify-between flex-col bg-white backdrop-blur-sm backdrop-opacity-40 h-full">
         <ul className="flex flex-col py-4 space-y-1">
           <li className="px-5">
             <div className="flex flex-row items-center h-8">
@@ -126,11 +135,13 @@ const SideNav: FC<SideNavProps> = ({}) => {
                 <span className="inline-flex justify-center items-center ml-4">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                 </span>
-                <span className="ml-2 text-sm tracking-wide truncate" onClick={()=>signOut()}>Logout</span>
+                <span className="ml-2 text-sm tracking-wide truncate" onClick={()=>signOutUser()}>Logout</span>
+                {signOutLoading ? <p>Loading...</p> : null}
               </button>
             </li>
         </ul>
       </div>
+      : null}
     </div>
   )
 }

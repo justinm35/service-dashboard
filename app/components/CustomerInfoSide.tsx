@@ -3,6 +3,8 @@ import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
 import { DocumentData } from 'firebase/firestore'
 import { FC, useState } from 'react'
 import ConfirmDelModal from './ConfirmDelModal'
+import { updateUser } from '../(firebase)/firebaseMethods'
+import { useRouter } from 'next/navigation'
 
 interface CustomerInfoSideProps {
   customer: DocumentData | undefined,
@@ -10,7 +12,7 @@ interface CustomerInfoSideProps {
 }
 
 const CustomerInfoSide: FC<CustomerInfoSideProps> = ({customer, params}) => {
-
+    const router = useRouter()
     const [toggleDeleteModal, setToggleDeleteModal] = useState<boolean>(false)
     const [toggleEditMode, setToggleEditMode] = useState<boolean>(false)
     const [editData, setEditData] = useState<any>({firstName : customer?.firstName, lastName: customer?.lastName, email: customer?.email, phone: customer?.phone, notes: customer?.notes})
@@ -18,7 +20,11 @@ const CustomerInfoSide: FC<CustomerInfoSideProps> = ({customer, params}) => {
     const handleChange = (e : React.FormEvent<HTMLInputElement>) => {
         setEditData({...editData, [e.currentTarget.name] : e.currentTarget.value})  
     }
-  
+    const updateUserData = () => {
+        updateUser(params.id, editData)
+        setToggleEditMode(false)
+        router.refresh()
+    }
   
     return (
     <>
@@ -47,7 +53,7 @@ const CustomerInfoSide: FC<CustomerInfoSideProps> = ({customer, params}) => {
                     <h3 className='text-sm font-medium text-gray-700 opacity-60'>Phone</h3>
                     <p className='text-md font-medium pb-2'>{customer?.phone}</p>
                     <h3 className='text-sm font-medium text-gray-700 opacity-60'>Notes</h3>
-                    <p className='text-md font-medium pb-2'>{customer?.notes ? "N/A" : customer?.notes}</p></>
+                    <p className='text-md font-medium pb-2'>{customer?.notes ? customer?.notes : "N/A"}</p></>
                     }
                 </div>
             </div>
@@ -57,7 +63,7 @@ const CustomerInfoSide: FC<CustomerInfoSideProps> = ({customer, params}) => {
                         <button onClick={()=>{ setEditData({firstName : customer?.firstName, lastName: customer?.lastName, email: customer?.email, phone: customer?.phone, notes: customer?.notes});setToggleEditMode(false)}} type="button" className="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 mr-2">
                             Cancel
                         </button>
-                        <button type="submit" onClick={()=>{}} className="py-2 px-3 text-sm font-medium text-center text-white bg-orange-400 rounded-lg hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-300">
+                        <button type='submit' onClick={()=>{updateUserData()}} className="py-2 px-3 text-sm font-medium text-center text-white bg-orange-400 rounded-lg hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-300">
                             Confirm
                         </button>
                     </div>

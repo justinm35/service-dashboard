@@ -1,5 +1,5 @@
 import { db } from "./firebaseConfig";
-import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDocumentSnapshot, DocumentData, QuerySnapshot, deleteDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDocumentSnapshot, DocumentData, QuerySnapshot, deleteDoc, updateDoc } from "firebase/firestore";
 
 
 export async function addData(data : IClient) { // Is this allowed??
@@ -21,4 +21,16 @@ export async function deleteDocument(id: string) {
     }).catch((err) => {
         return {success: false, error: err}
     })
+}
+
+
+
+export async function updateUser(id: string, updatedData : any) {
+    try {
+        const cusotmerRef = doc(db, "Customers", id )
+        await updateDoc(cusotmerRef, {...updatedData})   
+    } catch (error) {
+        console.log(error)
+    }
+
 }

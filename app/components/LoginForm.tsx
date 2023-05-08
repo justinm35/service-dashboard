@@ -5,6 +5,8 @@ import TASlogo from '/public/TAS-logo.webp'
 import Link from 'next/link'
 import { signIn } from '@/app/(firebase)/authMethods'
 import { useRouter } from 'next/navigation'
+import { TailSpin } from 'react-loader-spinner'
+
 
 interface LoginformProps {
   
@@ -18,20 +20,25 @@ const LoginForm: FC<LoginformProps> = ({}) => {
     const router = useRouter()
     const [formData, setFormData] = useState<ISignInData>({email : "",password: ""})
     const [errorState, setErrorState] = useState<any>()
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const handleChange = (e : React.FormEvent<HTMLInputElement>) => {
         setFormData({...formData, [e.currentTarget.name] : e.currentTarget.value})
     }
     const handleSignIn = async (e : MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        const { result, error } = await signIn(formData.email, formData.password)
-        if(error) {
-            setErrorState(error)
-            return;
-        }
-        return router.push('/dashboard')
+        setIsLoading(true)
+        
+        signIn(formData.email, formData.password)
+        .then((data) => {
+                router.refresh()
+                router.push('/dashboard')
+        })
+        .catch((err)=>{console.log(err)})
+        .finally(() => {
+            setIsLoading(false)
+        })
     }
-    
   return (
     <section className="">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -66,7 +73,9 @@ const LoginForm: FC<LoginformProps> = ({}) => {
                             </div>
                             <Link href="/auth/recovery" className="text-sm font-medium text-orange-400 hover:underline ">Forgot password?</Link>
                         </div>
-                        <button onClick={(e)=>handleSignIn(e)} type="submit" className="transition w-full bg-orange-400 text-white hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Sign in</button>
+                        <button onClick={(e)=>handleSignIn(e)} type="submit" className="transition w-full bg-orange-400 text-white hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex items-center justify-center space-x-3">
+                            <span>Sign in </span>
+                            {isLoading ? <TailSpin color="#ffffff"  height="20" width="20" /> : null}</button>
                         <p className="text-sm font-light text-gray-500">
                             Don’t have an account yet? <Link href="/auth/register" className="font-medium text-orange-400 hover:underline ">Sign up</Link>
                         </p>
