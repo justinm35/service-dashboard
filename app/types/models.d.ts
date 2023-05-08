@@ -6,7 +6,7 @@ interface IClient {
     serviceDue : boolean,
     visits: string[],
     phone: string,
-    notes: string
+    notes?: string
 }
 
 interface IProduct {
