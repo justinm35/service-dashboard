@@ -19,6 +19,7 @@
     "eslint-config-next": "13.3.4",
     "firebase": "^9.21.0",
     "firebase-admin": "^11.8.0",
+    "flowbite": "^1.6.5",
     "heroicons": "^2.0.17",
     "next": "13.3.4",
     "next-firebase-auth": "^1.0.0-canary.19",

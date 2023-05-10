@@ -17,7 +17,7 @@ interface ISignUpData {
     confPassword: string
 }
 
-const Recovery: FC<pageProps> = ({}) => {
+const Register: FC<pageProps> = ({}) => {
     const router = useRouter()
     const [formData, setFormData] = useState<ISignUpData>({email : "",password: "",confPassword: ""})
     const [errorState, setErrorState] = useState<any>()
@@ -28,16 +28,17 @@ const Recovery: FC<pageProps> = ({}) => {
     const handleSignUp = async (e : MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         if(formData.confPassword !== formData.password) {
-            setErrorState("error pass dont match")
+            setErrorState("Password's dont match")
             return;
         }
-        const { result, error } = await signUp(formData.email, formData.password)
-        if(error) {
-            setErrorState(error)
-            return;
-        }
-        console.log(result)
-        return router.push('/dashboard')
+        signUp(formData.email, formData.password)
+            .then(() => {
+                router.refresh()
+                router.push('/dashboard')
+            })
+            .catch((err) => {
+                setErrorState(err.message)
+            })
     }
   return (
     <section className="">
@@ -63,16 +64,19 @@ const Recovery: FC<pageProps> = ({}) => {
                     </div>
                     <div>
                         <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 ">Confirm password</label>
-                        <input value={formData.confPassword} onChange={handleChange} type="confirm-password" name="confPassword" id="confPassword" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
+                        <input value={formData.confPassword} onChange={handleChange} type="password" name="confPassword" id="confPassword" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
                     </div>
-                    <div className="flex items-start">
+                    <div className='h-3'>
+                        {errorState ? <p className='text-sm font-semibold text-red-400'>{errorState}</p> : null}
+                    </div>
+                    {/* <div className="flex items-start">
                         <div className="flex items-center h-5">
                             <input id="newsletter" aria-describedby="newsletter" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300  "/>
                         </div>
                         <div className="ml-3 text-sm">
                             <label htmlFor="newsletter" className="font-light text-gray-500 ">I accept the <a className="font-medium text-orange-400 hover:underline " href="#">Terms and Conditions</a></label>
                         </div>
-                    </div>
+                    </div> */}
                     <button type="submit" onClick={(e)=>handleSignUp(e)} className=" transition w-full bg-orange-400 text-white hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Sign in</button>
                     <p className="text-sm font-light text-gray-500">
                       Already have an account? <Link href="/auth" className="font-medium text-orange-400 hover:underline">Login here</Link>
@@ -84,4 +88,4 @@ const Recovery: FC<pageProps> = ({}) => {
   )
 }
 
-export default Recovery
+export default Register

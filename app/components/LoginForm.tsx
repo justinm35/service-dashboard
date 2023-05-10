@@ -28,17 +28,22 @@ const LoginForm: FC<LoginformProps> = ({}) => {
     const handleSignIn = async (e : MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         setIsLoading(true)
-        
+        setErrorState('')
         signIn(formData.email, formData.password)
         .then((data) => {
                 router.refresh()
                 router.push('/dashboard')
         })
-        .catch((err)=>{console.log(err)})
+        .catch((err)=>{
+            setErrorState(err.message)
+            }
+        )
         .finally(() => {
             setIsLoading(false)
         })
     }
+
+
   return (
     <section className="">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -56,24 +61,24 @@ const LoginForm: FC<LoginformProps> = ({}) => {
                     <form className="space-y-4 md:space-y-6" action="#">
                         <div>
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
-                            <input onChange={handleChange} value={formData.email} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="name@company.com"/>
+                            <input onChange={handleChange} value={formData.email} type="email" name="email" id="email" 
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="name@company.com"/>
                         </div>
                         <div>
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
-                            <input onChange={handleChange} value={formData.password} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" />
+                            <input onChange={handleChange} value={formData.password} type="password" name="password" id="password" placeholder="••••••••" 
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" />
                         </div>
-                        <div className="flex items-center justify-between">
+                        <div className='h-1 -pt-4'>
+                        {errorState ? <p className='text-sm font-semibold text-red-400'>{errorState}</p> : null}
+                        </div>
+                        <div className="flex items-center justify-between ">
                             <div className="flex items-start">
-                                {/* <div className="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-orang-300" />
-                                </div>
-                                <div className="ml-3 text-sm">
-                                    <label htmlFor="remember" className="text-gray-500">Remember me</label>
-                                </div> */}
                             </div>
-                            <Link href="/auth/recovery" className="text-sm font-medium text-orange-400 hover:underline ">Forgot password?</Link>
+                            <Link href="/auth/recover" className="text-sm font-medium text-orange-400 hover:underline ">Forgot password?</Link>
                         </div>
-                        <button onClick={(e)=>handleSignIn(e)} type="submit" className="transition w-full bg-orange-400 text-white hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex items-center justify-center space-x-3">
+                        <button onClick={(e)=>handleSignIn(e)} type="submit" 
+                        className="transition w-full bg-orange-400 text-white hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex items-center justify-center space-x-3">
                             <span>Sign in </span>
                             {isLoading ? <TailSpin color="#ffffff"  height="20" width="20" /> : null}</button>
                         <p className="text-sm font-light text-gray-500">

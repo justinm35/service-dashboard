@@ -24,7 +24,6 @@ export async function deleteDocument(id: string) {
 }
 
 
-
 export async function updateUser(id: string, updatedData : any) {
     try {
         const cusotmerRef = doc(db, "Customers", id )
@@ -33,4 +32,17 @@ export async function updateUser(id: string, updatedData : any) {
         console.log(error)
     }
 
+}
+
+
+export async function addProduct(data: IProduct) {
+    const prodcutRef = collection(db, 'Products')
+
+    await addDoc(prodcutRef, data)
+        .then(docRef => {
+            return {success: true}
+        })
+        .catch(error => {
+            return {success: true, error: error}
+        })
 }

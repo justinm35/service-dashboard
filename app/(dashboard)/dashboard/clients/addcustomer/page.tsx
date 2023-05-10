@@ -1,7 +1,7 @@
 "use client"
 
 import { FC, useState } from 'react'
-import { ArrowLeftIcon } from '@heroicons/react/24/solid'
+import { ArrowLeftIcon, UserIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { db } from '@/app/(firebase)/firebaseConfig'
 import {collection,addDoc,updateDoc,doc,deleteDoc,setDoc} from "firebase/firestore";
@@ -31,7 +31,7 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
   return (
     <section className="">
     <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-    <h2 className='font-semibold text-2xl text-gray-500 pb-6'>Add a new customer</h2>
+    <h2 className='font-semibold text-2xl text-gray-500 pb-6 flex items-center'><UserIcon className='w-8 h-8 mr-2'/>Add a new customer</h2>
         <form>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <div className="w-full">
