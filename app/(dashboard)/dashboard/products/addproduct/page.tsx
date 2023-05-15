@@ -5,7 +5,7 @@ import { ArrowLeftIcon, CubeIcon, XCircleIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { db } from '@/app/(firebase)/firebaseConfig'
 import {collection,addDoc,updateDoc,doc,deleteDoc,setDoc} from "firebase/firestore";
-import {addData, addProduct} from '@/app/(firebase)/firebaseMethods'
+import {addData, addProduct, uploadFile} from '@/app/(firebase)/firebaseMethods'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { convertToBase64 } from '@/app/utils/toBase64'
@@ -17,20 +17,24 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
     const router = useRouter()
 
     const [formData, setFormData] = useState({image: '', modelNum: '', name: '', manualLink: '', warrantyLink: ''})
+    const [blobData, setBlobData] = useState<{manualBlob: Blob | null, warrantyBlob: Blob | null}>({manualBlob: null, warrantyBlob: null})
     const handleChange = (e : React.FormEvent<HTMLInputElement>) => {
         setFormData({...formData, [e.currentTarget.name] : e.currentTarget.value})  
     }
 
-    const handleUploadFile = async (e: React. ChangeEvent<HTMLInputElement>) => {
+    const handleUploadFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return;
         const file : Blob | null = e.target.files[0];
         const base64 : string = await convertToBase64(file);
         setFormData({...formData, image: base64})
     }
-
+    const submitBlob = (e : React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files) return;
+        setBlobData({...blobData, [e.target.name] : e.target.files[0]})
+    }
     const handleSubmit = (e : React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        addProduct(formData)
+        addProduct(formData, blobData)
         setFormData({image: '', modelNum: '', name: '', manualLink: '', warrantyLink: ''})
         router.push('/dashboard/products')
     }
@@ -55,11 +59,11 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
                     <div className='w-full gap-6'>
                         <div className='w-full'>
                             <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file_input">Upload Warranty</label>
-                            <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none " id="file_input" type="file"/>
+                            <input name="warrantyBlob" onChange={(e)=>submitBlob(e)} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none " id="file_input" type="file"/>
                         </div>
                         <div className='w-full'>
                             <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file_input">Upload Manual</label>
-                            <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none " id="file_input" type="file"/>
+                            <input name="manualBlob" onChange={(e)=>submitBlob(e)} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none " id="file_input" type="file"/>
                         </div>
                     </div>
                     

@@ -1,6 +1,7 @@
 import { firebase_app } from "./firebaseConfig";
 import { UserCredential, sendPasswordResetEmail, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut as signOutSession } from "firebase/auth";
 import { setCookie, deleteCookie } from "cookies-next";
+import { addData } from "./firebaseMethods";
 
 export const auth = getAuth(firebase_app);
 
@@ -12,6 +13,8 @@ export async function signUp(email : string, password : string) {
     .then((token) => {
         setCookie('cookieKey', token, {maxAge: 60 * 6 * 24 })
         return('success')
+    }).then(() => {
+        addData({firstName: "", lastName: "", email: email, serviceDue: false, visits: [], phone: "", notes: "",})
     })
     .catch((err) => {
         console.log(err.code)

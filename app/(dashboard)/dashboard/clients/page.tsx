@@ -54,7 +54,7 @@ const Client = async ({}) => {
             </thead>
             <tbody className="divide-y divide-gray-100 border-t border-gray-100">
                 {customerData.map((customer) => {
-                    return <UserTableItem key={customer.id} client={{firstName: customer.firstName,lastName: customer.lastName, email: customer.email, serviceDue : customer.serviceDue, visits: customer.visits, phone: customer.phone, id: customer.id}} />
+                    return <UserTableItem key={customer.id} client={{firstName: customer.firstName,lastName: customer.lastName, email: customer.email, serviceDue : customer.serviceDue, visits: customer.visits, phone: customer.phone, id: customer.id, verified: customer.verified}} />
                 })}
             </tbody>
             </table>

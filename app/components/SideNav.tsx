@@ -10,9 +10,7 @@ import AuthProvider, { useAuth } from '../helpers/AuthProvider'
 import Link from 'next/link'
 import { Bars3Icon } from '@heroicons/react/24/solid'
 
-interface SideNavProps {
-  
-}
+interface SideNavProps {}
 
 const SideNav: FC<SideNavProps> = ({}) => {
   const router = useRouter()
@@ -23,7 +21,7 @@ const SideNav: FC<SideNavProps> = ({}) => {
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {if(user){setUserInfo(user)}})
     },[auth])
-
+    // console.log(auth)
     const [showSidebar, setShowSidebar] = useState<boolean>(true)
     const [signOutLoading, setSignOutLoading] = useState<boolean>(false)
 

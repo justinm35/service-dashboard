@@ -47,7 +47,7 @@ const page = async ({}: pageProps) => {
         </thead>
         <tbody className="divide-y divide-gray-100 border-t border-gray-100">
           {productData.map((product : IProduct) => (
-            <ProductTableItem key={product.id} product={{image: product?.image, modelNum: product?.modelNum, name: product?.name, manualLink: product?.manualLink, warrantyLink: product?.manualLink}} />
+            <ProductTableItem key={product.id} product={{image: product?.image, modelNum: product?.modelNum, name: product?.name, manualLink: product?.manualLink, warrantyLink: product?.warrantyLink, id: product?.id}} />
           ))}
           
         </tbody>

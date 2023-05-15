@@ -1,4 +1,5 @@
-import { db } from "./firebaseConfig";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, fbStorage } from "./firebaseConfig";
 import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDocumentSnapshot, DocumentData, QuerySnapshot, deleteDoc, updateDoc } from "firebase/firestore";
 
 
@@ -35,14 +36,32 @@ export async function updateUser(id: string, updatedData : any) {
 }
 
 
-export async function addProduct(data: IProduct) {
+export async function addProduct(data: IProduct, blobData: {manualBlob: Blob | null, warrantyBlob: Blob | null}) {
     const prodcutRef = collection(db, 'Products')
-
-    await addDoc(prodcutRef, data)
+    const manualLink =  await uploadFile('Manual', blobData?.manualBlob)
+    const warrantyLink =  await uploadFile('Warranty', blobData?.warrantyBlob)
+    await addDoc(prodcutRef, {...data, warrantyLink: warrantyLink, manualLink: manualLink})
         .then(docRef => {
             return {success: true}
         })
         .catch(error => {
             return {success: true, error: error}
         })
+}
+
+
+export async function uploadFile(fileDir : string, file : Blob | null) : Promise<string>{
+    const storageRef = ref(fbStorage, `${fileDir}/${Date.now()}`)
+
+    return uploadBytes(storageRef, file as Blob)
+    .then((snapshot) => {
+        return getDownloadURL(snapshot.ref)
+    }).then((res : string) => {
+        console.log(res)
+        return res
+    })
+    .catch((err)=> {
+        return 'error'
+        console.log(err)
+    })
 }
