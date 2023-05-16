@@ -44,7 +44,7 @@ const ProductTableItem = ({product} : ProductTableItemProps) => {
           <td className="px-6 py-4"><a onClick={()=>setPrevPDF(product.manualLink)} className='underline opacity-50 hover:opacity-90 cursor-pointer'>View</a></td>
           <td className="px-6 py-4">
             <div className="flex justify-end gap-4">
-              <Link href={`/dashboard/products/${product.id}/edit`}>
+              <Link href={`/dashboard/products/${product.id}/product`}>
                 <PencilSquareIcon className='h-5 w-5 transition hover:scale-110'/>
               </Link>
             </div>

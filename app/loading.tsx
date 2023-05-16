@@ -6,7 +6,7 @@ interface loadingProps {
 }
 
 const loading: FC<loadingProps> = ({}) => {
-  return <div>Loading</div> 
+  return <div className='animate-spin'>Spinning</div> 
   // <div>
   //   <Grid
   //     height="80"
