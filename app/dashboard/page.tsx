@@ -1,10 +1,10 @@
 import { FC } from 'react'
 
-interface pageProps {
+interface DashboardLangingPageProps {
   
 }
 
-const page: FC<pageProps> = ({}) => {
+const DashboardLangingPage: FC<DashboardLangingPageProps> = ({}) => {
 
   return (
     <div className='w-full h-full flex  items-center gap-5 p-10'>
@@ -62,4 +62,4 @@ const page: FC<pageProps> = ({}) => {
     )
 }
 
-export default page
+export default DashboardLangingPage
