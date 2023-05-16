@@ -5,11 +5,11 @@ import { DocumentData, collection, getDocs } from 'firebase/firestore'
 import Link from 'next/link'
 import { FC } from 'react'
 
-interface pageProps {
+interface ProductsPageProps {
   
 }
 
-const page = async ({}: pageProps) => {
+const ProductsPage = async ({}: ProductsPageProps) => {
   
   const ref = collection(db, 'Products')
   const snapshot = await getDocs(ref)
@@ -57,4 +57,4 @@ const page = async ({}: pageProps) => {
   )
 }
 
-export default page
+export default ProductsPage

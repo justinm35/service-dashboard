@@ -6,13 +6,13 @@ import { DocumentData, doc, getDoc } from 'firebase/firestore'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
-interface pageProps {
+interface SingleProductPageProps {
   params: {id: string}
 }
 
 
 
-const page = ({params}: pageProps) => {
+const SingleProductPage = ({params}: SingleProductPageProps) => {
 
     const [toggleEdit, setToggleEdit] = useState<boolean>(false)
     const [product, setProduct] = useState<any>()
@@ -73,4 +73,4 @@ const page = ({params}: pageProps) => {
     )
 }
 
-export default page
+export default SingleProductPage
