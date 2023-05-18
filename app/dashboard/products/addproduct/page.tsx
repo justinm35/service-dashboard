@@ -16,7 +16,7 @@ interface AddCustomerProps {}
 const AddCustomer: FC<AddCustomerProps> = ({}) => {
     const router = useRouter()
 
-    const [formData, setFormData] = useState({image: '', modelNum: '', name: '', manualLink: '', warrantyLink: ''})
+    const [formData, setFormData] = useState<IProduct>({image: '',category: '', modelNum: '', name: '', manualLink: '', warrantyLink: ''})
     const [blobData, setBlobData] = useState<{manualBlob: Blob | null, warrantyBlob: Blob | null}>({manualBlob: null, warrantyBlob: null})
     const handleChange = (e : React.FormEvent<HTMLInputElement>) => {
         setFormData({...formData, [e.currentTarget.name] : e.currentTarget.value})  
@@ -35,10 +35,10 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
     const handleSubmit = (e : React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
         addProduct(formData, blobData)
-        setFormData({image: '', modelNum: '', name: '', manualLink: '', warrantyLink: ''})
+        setFormData({image: '', category: '', modelNum: '', name: '', manualLink: '', warrantyLink: ''})
         router.push('/dashboard/products')
     }
-
+    console.log(formData)
 
 
   return (
@@ -57,6 +57,20 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
                 </div>
                 <div className="sm:col-span-2 flex gap-6">
                     <div className='w-full gap-6'>
+                        <div>
+                            <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">Category</label>
+                            <select  onChange={(e: any)=>handleChange(e)} name="category" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                                <option value="">Select category</option>
+                                <option value="Hospital Beds">Hospital Beds</option>
+                                <option value="Mattress">Mattress</option>
+                                <option value="Stairlifts">Stairlifts</option>
+                                <option value="Porch Lifts">Porch Lifts</option>
+                                <option value="Floor Lift">Floor Lift</option>
+                                <option value="Ceiling Lift">Ceiling Lift</option>
+                                <option value="Tracking">Tracking</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
                         <div className='w-full'>
                             <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file_input">Upload Warranty</label>
                             <input name="warrantyBlob" onChange={(e)=>submitBlob(e)} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none " id="file_input" type="file"/>
@@ -87,19 +101,9 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
                         }
                         </div>
                 </div> 
-                {/* <div>
-                    <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
-                    <select id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
-                        <option value="12">Select category</option>
-                        <option value="TV">TV/Monitors</option>
-                        <option value="PC">PC</option>
-                        <option value="GA">Gaming/Console</option>
-                        <option value="PH">Phones</option>
-                    </select>
-                </div> */}
             </div>
             <div className='w-full flex justify-between'>
-                <Link href="/dashboard/clients">
+                <Link href="/dashboard/products">
                     <button className="transition inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-gray-900 bg-gray-200 rounded-lg focus:ring-4 focus:ring-zinc-200 hover:bg-gray-300">
                         <ArrowLeftIcon className='h-4 w-4 text-gray-900 mr-1'/>Back
                     </button>

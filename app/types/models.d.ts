@@ -14,6 +14,7 @@ interface IProduct {
     id?: string
     image?: string,
     manualLink?: string,
+    category: string,
     modelNum: string,
     name: string,
     warrantyLink?: string,

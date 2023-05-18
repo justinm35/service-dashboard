@@ -57,7 +57,6 @@ export async function uploadFile(fileDir : string, file : Blob | null) : Promise
     .then((snapshot) => {
         return getDownloadURL(snapshot.ref)
     }).then((res : string) => {
-        console.log(res)
         return res
     })
     .catch((err)=> {

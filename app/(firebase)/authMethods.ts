@@ -2,6 +2,7 @@ import { firebase_app } from "./firebaseConfig";
 import { UserCredential, sendPasswordResetEmail, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut as signOutSession } from "firebase/auth";
 import { setCookie, deleteCookie } from "cookies-next";
 import { addData } from "./firebaseMethods";
+import { adminAuth } from "./firebaseAdminConfig";
 
 export const auth = getAuth(firebase_app);
 
@@ -30,6 +31,7 @@ export async function signUp(email : string, password : string) {
 }
 
 export async function signIn(email: string, password: string) {
+    
     return signInWithEmailAndPassword(auth, email, password)
         .then((result) => {
             return result.user.getIdToken()
@@ -48,7 +50,7 @@ export async function signIn(email: string, password: string) {
                     throw new Error ('Hmm, something went wrong, try again!')
             }
         })
-    
+        
 }
 
 export async function resetPass(email : string) {

@@ -24,6 +24,8 @@ function createFirebaseAdminApp() {
   }
 }
 
-
+// adminAuth.setCustomUserClaims('justin.martin3501@gmail.com', { admin: true })
 const firebaseAdmin = createFirebaseAdminApp();
 export const adminAuth = getAuth(firebaseAdmin);
+
+

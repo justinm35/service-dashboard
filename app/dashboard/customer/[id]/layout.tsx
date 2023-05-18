@@ -5,7 +5,6 @@ import { DocumentTextIcon, PencilSquareIcon, PuzzlePieceIcon, TrashIcon } from '
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import { DocumentData, collection, doc, getDoc, getDocs } from 'firebase/firestore'
 import Link from 'next/link'
-import { useState } from 'react'
 
 interface layoutProps {
   children: React.ReactNode,

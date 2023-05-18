@@ -35,11 +35,12 @@ const ProductsPage = async ({}: ProductsPageProps) => {
         <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
         <thead className="bg-gray-50">
             <tr>
-            <th scope="col" className="px-6 py-4 font-medium text-gray-900"></th>
-            <th scope="col" className="px-6 py-4 font-medium text-gray-900 flex items-center">Item
+            <th scope="col" className="px-6 w-5 font-medium text-gray-900"></th>
+            <th scope="col" className="px-6 py-4 font-medium text-gray-900 flex items-center w-3">Name
                 <button className='ml-1 p-1 border border-gray-300/70 rounded-md text-gray-500'><ChevronUpIcon className='w-2 h-2'/><ChevronDownIcon className='w-2 h-2'/></button>
             </th>
             <th scope="col" className="px-6 py-4 font-medium text-gray-900">Model #</th>
+            <th scope="col" className="px-6 py-4 font-medium text-gray-900">Category</th>
             <th scope="col" className="px-6 py-4 font-medium text-gray-900">Warranty</th>
             <th scope="col" className="px-6 py-4 font-medium text-gray-900">Manual</th>
             <th scope="col" className="px-6 py-4 font-medium text-gray-900"></th>
@@ -47,7 +48,7 @@ const ProductsPage = async ({}: ProductsPageProps) => {
         </thead>
         <tbody className="divide-y divide-gray-100 border-t border-gray-100">
           {productData.map((product : IProduct) => (
-            <ProductTableItem key={product.id} product={{image: product?.image, modelNum: product?.modelNum, name: product?.name, manualLink: product?.manualLink, warrantyLink: product?.warrantyLink, id: product?.id}} />
+            <ProductTableItem key={product.id} product={{image: product?.image, modelNum: product?.modelNum, name: product?.name, manualLink: product?.manualLink, warrantyLink: product?.warrantyLink, id: product?.id, category: product?.category}} />
           ))}
           
         </tbody>
