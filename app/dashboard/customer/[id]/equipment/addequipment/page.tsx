@@ -8,11 +8,11 @@ import Datepicker from "tailwind-datepicker-react"
 import { useRouter } from 'next/navigation'
 
 
-interface addEquipmentProps {
+interface AddEquipmentProps {
     params: {id: string}
 }
 
-const addEquipment = ({params}: addEquipmentProps) => {
+const AddEquipment = ({params}: AddEquipmentProps) => {
     const router = useRouter()
 
     const[formData, setFormData] = useState<any>({equipmentId: "", serialNum: "", serviceDate: "", purchaseDate: ""})
@@ -87,4 +87,4 @@ const addEquipment = ({params}: addEquipmentProps) => {
   )
 }
 
-export default addEquipment
+export default AddEquipment
