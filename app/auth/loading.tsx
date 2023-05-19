@@ -7,7 +7,7 @@ interface LoginLoadingPageProps {}
 const LoginLoadingPage: FC<LoginLoadingPageProps> = ({}) => {
   return (
     <div className='h-screen w-screen flex items-center justify-center'>
-            
+              
     </div>
   )
 }

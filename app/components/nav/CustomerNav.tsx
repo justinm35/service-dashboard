@@ -1,10 +1,16 @@
+'use client'
+
+
 import { PhoneIcon, Cog6ToothIcon, CubeIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { useSelectedLayoutSegment } from 'next/navigation';
 import { FC } from 'react'
 
 interface CustomerNavProps {}
 
 const CustomerNav: FC<CustomerNavProps> = ({}) => {
+
+  const activeSegment = useSelectedLayoutSegment();
     return (
         <ul className="flex flex-col py-4 space-y-1">
         <li className="px-5">
@@ -13,7 +19,8 @@ const CustomerNav: FC<CustomerNavProps> = ({}) => {
           </div>
         </li>
         <li>
-          <Link href="/dashboard/myproducts" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+          <Link href="/dashboard/myproducts" className={"relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 " + 
+              (activeSegment === 'myproducts')}>
             <span className="inline-flex justify-center items-center ml-4">
             <CubeIcon className='w-6 h-6 text-gray-700'/>
             </span>

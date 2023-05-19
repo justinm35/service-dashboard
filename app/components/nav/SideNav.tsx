@@ -1,20 +1,22 @@
 "use client"
 
 import Image from 'next/image'
-import { FC, useEffect, useState } from 'react'
+import { FC, Suspense, useEffect, useState } from 'react'
 import TASlogo from '/public/TAS-logo.webp'
 import { signOut } from '../../(firebase)/authMethods'
 import { getAuth, getIdTokenResult, onAuthStateChanged } from 'firebase/auth'
-import { notFound, useRouter } from 'next/navigation'
+import { notFound, useRouter, useSelectedLayoutSegment } from 'next/navigation'
 import AuthProvider, { useAuth } from '../../helpers/AuthProvider'
 import Link from 'next/link'
 import { Bars3Icon, UsersIcon, CubeIcon, Cog6ToothIcon, UserIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline'
 import AdminNav from './AdminNav'
 import CustomerNav from './CustomerNav'
 
-interface SideNavProps {}
+interface SideNavProps {
+  authStatus: string
+}
 
-const SideNav: FC<SideNavProps> = ({}) => {
+const SideNav: FC<SideNavProps> = ({authStatus}) => {
   const router = useRouter()
   const [userInfo, setUserInfo] = useState<any>()  
 
@@ -53,15 +55,14 @@ const SideNav: FC<SideNavProps> = ({}) => {
       })
     }
     const NavElements = () => {
-      if(isAdmin) {
+      if(authStatus === 'admin') {
         return (<AdminNav/>)
-      }else if(isAdmin === false) {
+      }else if(authStatus === 'customer') {
         return (<CustomerNav/>)
       }else{
         return null
       } 
     }
-
     return (
     <div className="fixed flex flex-col top-0 left-0 w-full lg:w-64 h-auto lg:h-full border-r text-gray-800 z-10">
       <div className="flex items-center justify-center h-fit border-b pl-3 bg-white">
@@ -82,7 +83,9 @@ const SideNav: FC<SideNavProps> = ({}) => {
       {showSidebar ? 
       <div className="overflow-y-auto overflow-x-hidden flex-grow flex justify-between flex-col bg-white backdrop-blur-sm backdrop-opacity-40 h-full">
         {/* Renders either admin or customer elements */}
-        <NavElements /> 
+        <Suspense fallback={<p>Hello World</p>}>
+          <NavElements /> 
+        </Suspense>
         <ul className=''>
           <li>
               <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">

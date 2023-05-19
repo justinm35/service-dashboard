@@ -1,5 +1,5 @@
 "use client"
-import { ArrowLongRightIcon, ArrowRightOnRectangleIcon, ArrowTopRightOnSquareIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { ArrowLongRightIcon, ArrowRightOnRectangleIcon, ArrowTopRightOnSquareIcon, CheckBadgeIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
@@ -11,7 +11,7 @@ const UserTableItem = ({client} : {client : IClient}) => {
         <tr className="hover:bg-gray-50">
           <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
             <div className="text-sm">
-              <div className="font-medium text-gray-700">{client.firstName + " " + client.lastName}</div>
+              <div className="font-medium text-gray-700 flex items-center">{client.firstName + " " + client.lastName}{client?.verified ? <CheckBadgeIcon className='h-5 w-5 text-orange-400 ml-1'/> : null}</div>
               <div className="text-gray-400">{client.email}</div>
             </div>
           </th>
@@ -38,7 +38,7 @@ const UserTableItem = ({client} : {client : IClient}) => {
             </div>
           </td>
           <td className="px-6 py-4">
-            {client?.verified ? 
+            {/* {client?.verified ? 
             <div className="flex justify-end gap-4 hover:scale-110">
               <Link href={`/dashboard/customer/${client.id}/equipment`}>
                 <ArrowLongRightIcon className='h-5 w-5'/>
@@ -51,7 +51,7 @@ const UserTableItem = ({client} : {client : IClient}) => {
               <div className='rounded-full h-6 w-6 bg-red-400 p-1 transition hover:scale-110 hover:bg-red-500'>
                 <XMarkIcon  className='w-full h-full text-white'/>
               </div>
-            </div>}
+            </div>} */}
           </td>
         </tr>
   )

@@ -8,7 +8,7 @@ interface NotesProps {
 
 const Notes: FC<NotesProps> = ({}) => {
   return (
-  <div className='max-h-32 relative'>
+  <div className=''>
     <div className='w-full flex justify-between border border-zinc-100 border-l-0 border-r-0 border-t-0 pb-2 mb-2'>
         <h3 className='text-2xl font-bold text-gray-700'>Notes</h3>
         <PencilSquareIcon  className='w-5 h-5 text-zinc-500 hover:text-zinc-700 transition'/>
