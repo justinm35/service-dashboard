@@ -38,6 +38,11 @@ const UserTableItem = ({client} : {client : IClient}) => {
             </div>
           </td>
           <td className="px-6 py-4">
+          <div className="flex justify-end gap-4 hover:scale-110">
+              <Link href={`/dashboard/customer/${client.id}/equipment`}>
+                <ArrowLongRightIcon className='h-5 w-5'/>
+              </Link>
+            </div>
             {/* {client?.verified ? 
             <div className="flex justify-end gap-4 hover:scale-110">
               <Link href={`/dashboard/customer/${client.id}/equipment`}>
