@@ -19,3 +19,5 @@ interface IProduct {
     name: string,
     warrantyLink?: string,
 }
+
+declare module 'tailwind-datepicker-react'

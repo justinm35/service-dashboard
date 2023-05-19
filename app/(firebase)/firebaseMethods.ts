@@ -64,3 +64,15 @@ export async function uploadFile(fileDir : string, file : Blob | null) : Promise
         console.log(err)
     })
 }
+
+export async function addCustomerEquipment(newEquipmentData: any, userId: string) {
+    const equipmentRef = collection(db, `/Customers/${userId}/Equipment`)
+    return addDoc(equipmentRef, newEquipmentData)
+        .then((data)=>{
+            console.log(data)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    
+}

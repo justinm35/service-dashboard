@@ -26,7 +26,7 @@ const layout= async({children, params} : layoutProps) => {
         <p className='flex items-center'><DocumentTextIcon className='w-4 h-4 mr-2'/>{}0 Invoices</p>
 
     </div>
-    <div className='flex justify-between h-full'>
+    <div className='flex justify-between'>
         <div className='w-full pr-4'>
         <CustomerNav customerId={params?.id}/>
             <div>

@@ -28,7 +28,7 @@ const CustomerInfoSide: FC<CustomerInfoSideProps> = ({customer, params}) => {
   
     return (
     <>
-    <div className='w-80 h-fit bg-white rounded-md shadow-md p-6 text-gray-900 flex flex-col justify-between'>
+    <div className='w-80 h-fit bg-white rounded-lg shadow-sm p-6 text-gray-900 flex flex-col justify-between'>
             {/* <h3>{customer.firstName + " " + customer.lastName}</h3> */}
             <div>
                 <h3 className='text-md font-semibold text-gray-700 opacity-90 pb-1'>Customer Info</h3>

@@ -10,7 +10,6 @@ interface layoutProps {
 
 
 
-
 const layout = async ({children} : layoutProps) => {
 
 
