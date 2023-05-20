@@ -20,7 +20,6 @@ const Eqipment = async ({params} : EqipmentProps) => {
         return resEquipmentData
     }).then((resEquipmentData)=> {
     if(resEquipmentData && resEquipmentData.length !== 0) {
-      console.log(resEquipmentData)
       return (<EquipmentTable equipmentData={resEquipmentData} params={params}/>)
     } else{
       return(<div className='w-full flex flex-col items-center justify-center text-gray-900'>

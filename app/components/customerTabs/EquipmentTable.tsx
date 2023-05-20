@@ -1,8 +1,10 @@
+import { db } from '@/app/(firebase)/firebaseConfig'
 import { PlusIcon } from '@heroicons/react/24/solid'
 import { format } from 'date-fns'
-import { DocumentData } from 'firebase/firestore'
+import { DocumentData, doc, getDoc } from 'firebase/firestore'
 import Link from 'next/link'
 import { FC } from 'react'
+import EquipmentTableItem from './EquipmentTableItem'
 
 interface EquipmentTableProps {
     equipmentData : DocumentData[],
@@ -47,20 +49,10 @@ const EquipmentTable: FC<EquipmentTableProps> = ({equipmentData, params}) => {
         <tbody>
             {equipmentData.map((equipment) => {
                 return (
-                    <tr key={equipment.id}>
-                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
-                        {equipment.equipmentId}
-                        </th>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                        {equipment.serialNum}
-                        </td>
-                        <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            {format(new Date(equipment.serviceDate.seconds * 1000), 'MMM d, yyyy')}
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {format(new Date(equipment.purchaseDate.seconds * 1000), 'MMM d, yyyy')}
-                        </td>
-                    </tr>
+                  <>
+                  {/* @ts-expect-error Server Component */}
+                  <EquipmentTableItem key={equipment.id} equipment={JSON.parse(JSON.stringify(equipment))}/>
+                  </>
                 )
             })}
        
