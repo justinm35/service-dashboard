@@ -1,12 +1,10 @@
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import AdminDashboard from '../components/AdminDashboard'
 import CustomerDashboard from '../components/CustomerDashboard'
 import { cookies } from 'next/headers';
 import { adminAuth } from '../(firebase)/firebaseAdminConfig';
 import { redirect } from 'next/navigation';
+
 interface DashboardLangingPageProps {}
-
-
 
 const DashboardLangingPage = async({}) => {
   const nextCookies = cookies();

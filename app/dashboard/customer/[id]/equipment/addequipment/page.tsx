@@ -38,6 +38,7 @@ const AddEquipment = ({params}: AddEquipmentProps) => {
 
     const productsRef = collection(db, 'Products')
     const [productsList, setProductsList] = useState<{id: string, name: string}[]>([]);
+    console.log(productsList)
     useEffect(() => {
         getDocs(productsRef)
             .then((products) => {
@@ -45,7 +46,7 @@ const AddEquipment = ({params}: AddEquipmentProps) => {
             }).catch((err) => {
                 console.log(err)
             })
-    }, [productsRef])
+    }, [])
   return (
     <div className="max-w-2xl px-4">
       <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update product</h2>

@@ -20,4 +20,9 @@ interface IProduct {
     warrantyLink?: string,
 }
 
+interface ICustomerEquipment {
+    id?: string,
+    equipment: id
+}
+
 declare module 'tailwind-datepicker-react'
