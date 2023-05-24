@@ -28,7 +28,6 @@ const layout = async ({children} : layoutProps) => {
         return decodedToken
       }).then((claims)=>{
         if (claims.admin === true) {
-          console.log('access granted')
           return(<>  
           <SideNav authStatus={'admin'}/>
           <div className='fixed right-0 w-full h-screen overflow-auto pt-12 lg:pt-0 lg:w-[calc(100vw-16rem)]'>

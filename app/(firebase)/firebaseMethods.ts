@@ -65,7 +65,7 @@ export async function uploadFile(fileDir : string, file : Blob | null) : Promise
     })
 }
 
-export async function addCustomerEquipment(newEquipmentData: any, userId: string) {
+export async function addCustomerEquipment(newEquipmentData: ICustomerEquipment, userId: string) {
     const equipmentRef = collection(db, `/Customers/${userId}/Equipment`)
     return addDoc(equipmentRef, newEquipmentData)
         .then((data)=>{

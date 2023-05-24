@@ -30,7 +30,6 @@ const SideNav: FC<SideNavProps> = ({authStatus}) => {
       .then((idTokenResult)=>{
         if(!!idTokenResult.claims.admin) {
           setIsAdmin(true)
-          console.log('showadminui')
         }else{
           setIsAdmin(false)
           console.log('show Regular UI')

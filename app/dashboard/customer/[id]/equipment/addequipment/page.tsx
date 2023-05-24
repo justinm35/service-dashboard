@@ -15,7 +15,7 @@ interface AddEquipmentProps {
 const AddEquipment = ({params}: AddEquipmentProps) => {
     const router = useRouter()
 
-    const[formData, setFormData] = useState<any>({equipmentId: "", serialNum: "", serviceDate: "", purchaseDate: ""})
+    const[formData, setFormData] = useState<any>({equipmentName: "", equipmentId: "", serialNum: "", serviceDate: "", purchaseDate: ""})
     const handleChange = (e : React.FormEvent<HTMLInputElement>) => {
         setFormData({...formData, [e.currentTarget.name] : e.currentTarget.value})  
     }
@@ -24,7 +24,7 @@ const AddEquipment = ({params}: AddEquipmentProps) => {
         addCustomerEquipment(formData, params.id)
             .then((res) => {console.log(res)})
             .then(()=>{
-                setFormData({equipmentId: "", serialNum: "", serviceDate: "", purchaseDate: ""})
+                setFormData({equipmentName: "", equipmentId: "", serialNum: "", serviceDate: "", purchaseDate: ""})
                 router.push(`dashboard/customer/${params.id}/equipment`)
             })
             .catch((err)=> {console.log(err)})
@@ -54,7 +54,7 @@ const AddEquipment = ({params}: AddEquipmentProps) => {
           <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
               <div className="sm:col-span-2">
                   <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-                    <select onChange={(e)=>setFormData({...formData, equipmentId: e.target.value})}id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select onChange={(e)=>setFormData({...formData, equipmentId: e.target.value, equipmentName: e.target.innerText})}id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="">Choose a Product</option>
                     {productsList.map((data) => {
                         return (<option key={data.id} value={data.id}>{data.name}</option>)

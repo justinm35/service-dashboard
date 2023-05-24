@@ -22,7 +22,11 @@ interface IProduct {
 
 interface ICustomerEquipment {
     id?: string,
-    equipment: id
+    equipmentName?: string,
+    equipmentId : string,
+    purchaseDate: string,
+    serialNum: string,
+    serviceDate: string,
 }
 
 declare module 'tailwind-datepicker-react'

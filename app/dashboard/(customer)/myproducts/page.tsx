@@ -9,7 +9,7 @@ interface MyEquipmentProps {
 }
 
 const MyEquipment: FC<MyEquipmentProps> = ({}) => {
-  
+
   const nextCookies = cookies();
   const token: RequestCookie | undefined = nextCookies.get('cookieKey')
     let session: DecodedIdToken | null = null;
