@@ -3,15 +3,31 @@ import { db } from '@/app/(firebase)/firebaseConfig'
 import UserTableItem from '@/app/components/UserTableItem'
 import { DocumentData, collection, getDoc, getDocs } from 'firebase/firestore'
 import Link from 'next/link'
-import { FC, use, useEffect } from 'react'
+import { FC, use, useEffect, useState } from 'react'
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import { fetchCollection } from '@/app/(firebase)/firebaseFetchMethods'
+import { IClient } from '@/app/types/models'
 
 
 interface ClientProps {}
-const Client = async ({}) => {
-    return fetchCollection('Customers')
-        .then((customerData)=>{
+const Client = ({}) => {
+    const [customerData, setCustomerData] = useState<IClient[] | null>(null)
+
+    useEffect(()=>{
+        fetchCollection('Customers')
+            .then((data)=>{
+                setCustomerData(data)
+            })
+            .catch((error)=>{
+                console.log(error)
+                return(<p>{JSON.stringify(error)}</p>)
+
+            })
+    }, [])
+
+    if(customerData == null){
+        return(null)
+    }else{
         return (
             <div className='w-full h-full p-10'>
                 <h2 className='font-semibold text-2xl text-gray-500 pb-6'>All Customers</h2>
@@ -35,26 +51,20 @@ const Client = async ({}) => {
                             <button className='ml-1 p-1 border border-gray-300/70 rounded-md text-gray-500'><ChevronUpIcon className='w-2 h-2'/><ChevronDownIcon className='w-2 h-2'/></button>
                         </th>
                         <th scope="col" className="px-6 py-4 font-medium text-gray-900">Phone</th>
-                        <th scope="col" className="px-6 py-4 font-medium text-gray-900">Status</th>
-                        <th scope="col" className="px-6 py-4 font-medium text-gray-900">Visits</th>
                         <th scope="col" className="px-6 py-4 font-medium text-gray-900">Equipment Qty.</th>
                         <th scope="col" className="px-6 py-4 font-medium text-gray-900"></th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 border-t border-gray-100">
                         {customerData.map((customer: IClient) => {
-                            return <UserTableItem key={customer.id} client={{firstName: customer.firstName,lastName: customer.lastName, email: customer.email, serviceDue : customer.serviceDue, visits: customer.visits, phone: customer.phone, id: customer.id, verified: customer.verified}} />
+                            return <UserTableItem key={customer.id} client={{firstName: customer.firstName,lastName: customer.lastName, email: customer.email, phone: customer.phone, id: customer.id, verified: customer.verified}} />
                         })}
                     </tbody>
                     </table>
                 </div>
         </div>
             )
-    })
-    .catch((err)=>{
-        console.log(err)
-        return null
-    })
+    }
 }
 
 export default Client

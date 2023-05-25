@@ -2,17 +2,16 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 import { FC, useEffect, useState } from 'react'
 import MyEqupmentTableItem from './MyEqupmentTableItem'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from '@/app/(firebase)/firebaseConfig'
 import { DecodedIdToken } from 'firebase-admin/auth'
 import { fetchCollection } from '@/app/(firebase)/firebaseFetchMethods'
+import { ICustomerEquipment } from '@/app/types/models'
 
 interface MyEqupmentTableProps {
     session: null | DecodedIdToken,
 }
 
 const MyEqupmentTable = ({session}: MyEqupmentTableProps) => {
-  
+
     const [customerEquipment, setCustomerEquipment] = useState<ICustomerEquipment[] | null>(null)
 
     useEffect(()=>{

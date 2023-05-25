@@ -23,7 +23,7 @@ const InvoiceTable: FC<InvoiceTableProps> = ({invoiceData, params}) => {
         </div>
         <div className=''>
             <Link href={`dashboard/customer/${params.id}/equipment/addequipment`} className=' flex items-center justify-center max-w-xs py-2 px-4 text-sm font-medium text-center text-white border cursor-pointer bg-orange-400 border-orange-500 rounded-lg hover:bg-orange-500 focus:ring-4 focus:ring-orange-300'>
-            <PlusIcon className="w-6 h-6 mr-3"/>Add equipment</Link>
+            <PlusIcon className="w-6 h-6 mr-3"/>Add Invoice</Link>
         </div>
       </div>
     </div>

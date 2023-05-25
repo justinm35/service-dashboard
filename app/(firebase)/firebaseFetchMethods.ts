@@ -27,8 +27,8 @@ export const fetchCollectionGroup = cache(async (URI: string):Promise<any>=> {
     try {
         const snapshot = await getDocs(collectionGroup(db, URI))
         let collectionData: any = [];
-        snapshot.forEach((doc: any) => {
-            collectionData.push({id: doc.id, ...doc.data()})
+        snapshot.forEach((doc) => {
+            collectionData.push({id: doc.id, creatorId: doc.ref.parent.parent, ...doc.data()})
         })
         return collectionData
     } catch (error : undefined | any) { 
