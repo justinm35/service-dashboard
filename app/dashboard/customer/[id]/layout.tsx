@@ -1,4 +1,5 @@
 import { db } from '@/app/(firebase)/firebaseConfig'
+import { fetchDocumentById } from '@/app/(firebase)/firebaseFetchMethods'
 import CustomerInfoSide from '@/app/components/CustomerInfoSide'
 import CustomerNav from '@/app/components/CustomerNav'
 import { DocumentTextIcon, PencilSquareIcon, PuzzlePieceIcon, TrashIcon } from '@heroicons/react/24/outline'
@@ -12,6 +13,8 @@ interface layoutProps {
 }
 
 const layout= async({children, params} : layoutProps) => {
+
+    // const customer : IClient = fetchDocumentById('Customers', params?.id)
     const customerRef = doc(db, "Customers", params?.id)
     const customerSnap = await getDoc(customerRef)
     let customer : DocumentData | undefined =  customerSnap.data()

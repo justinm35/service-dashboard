@@ -1,11 +1,24 @@
+'use client'
+import { fetchCollection, fetchCollectionGroup } from '@/app/(firebase)/firebaseFetchMethods'
 import { BellAlertIcon } from '@heroicons/react/24/solid'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 interface ServiceRequestProps {
   
 }
 
 const ServiceRequest: FC<ServiceRequestProps> = ({}) => {
+  const [serviceRequestData, setServiceRequestData] = useState()
+  
+  useEffect(()=>{
+    fetchCollectionGroup('ServiceRequests')
+      .then((serviceRequests)=>{
+        console.log(serviceRequests)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
   return (
   <>
       <div className='w-full flex justify-between'>
@@ -27,6 +40,9 @@ const ServiceRequest: FC<ServiceRequestProps> = ({}) => {
               </thead>
 
               <tbody>
+                {
+
+                }
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                     Example Customer

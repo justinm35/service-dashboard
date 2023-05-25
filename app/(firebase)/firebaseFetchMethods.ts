@@ -1,6 +1,6 @@
 import { cache, useRef } from "react";
 import { db, fbStorage } from "./firebaseConfig";
-import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDocumentSnapshot, DocumentData, QuerySnapshot, deleteDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDocumentSnapshot, DocumentData, QuerySnapshot, deleteDoc, updateDoc, collectionGroup } from "firebase/firestore";
 
 /**
  * This will return a the entire collection from firebase using the input params
@@ -12,6 +12,20 @@ import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDo
 export const fetchCollection = cache(async (URI: string):Promise<any>=> {
     try {
         const snapshot = await getDocs(collection(db, URI))
+        let collectionData: any = [];
+        snapshot.forEach((doc: any) => {
+            collectionData.push({id: doc.id, ...doc.data()})
+        })
+        return collectionData
+    } catch (error : undefined | any) { 
+        console.log(error)
+        return error
+    }
+})
+
+export const fetchCollectionGroup = cache(async (URI: string):Promise<any>=> {
+    try {
+        const snapshot = await getDocs(collectionGroup(db, URI))
         let collectionData: any = [];
         snapshot.forEach((doc: any) => {
             collectionData.push({id: doc.id, ...doc.data()})
