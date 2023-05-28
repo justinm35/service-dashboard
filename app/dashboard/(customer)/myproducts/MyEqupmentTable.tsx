@@ -4,7 +4,6 @@ import { FC, useEffect, useState } from 'react'
 import MyEqupmentTableItem from './MyEqupmentTableItem'
 import { DecodedIdToken } from 'firebase-admin/auth'
 import { fetchCollection } from '@/app/(firebase)/firebaseFetchMethods'
-import { ICustomerEquipment } from '@/app/types/models'
 
 interface MyEqupmentTableProps {
     session: null | DecodedIdToken,
@@ -15,7 +14,8 @@ const MyEqupmentTable = ({session}: MyEqupmentTableProps) => {
     const [customerEquipment, setCustomerEquipment] = useState<ICustomerEquipment[] | null>(null)
 
     useEffect(()=>{
-      fetchCollection(`Customers/o7Wxjb9ZCmG5vEqrgaZP/Equipment`)//change this to variable ID
+      console.log(session?.uid)
+      fetchCollection(`Customers/${session?.uid}/Equipment`)//change this to variable ID
       .then((equipmentData) => {
         setCustomerEquipment(equipmentData)
       })

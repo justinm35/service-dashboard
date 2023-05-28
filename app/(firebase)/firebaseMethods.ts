@@ -15,6 +15,15 @@ export async function addData(data : IClient) { // Is this allowed??
         })
 }
 
+export async function createNewCustomer(data: IClient, uid: string) {
+    try {
+        await setDoc(doc(db, "Customers", uid), data)   
+        return {success: true}
+    } catch (error) {
+        return {success: true, error: error}
+    }
+}
+
 export async function deleteDocument(id: string) {
     await deleteDoc(doc(db, "Customers", id))
     .then((value) => {

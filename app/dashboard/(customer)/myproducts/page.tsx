@@ -8,24 +8,28 @@ import { RequestCookie, RequestCookies } from 'next/dist/compiled/@edge-runtime/
 interface MyEquipmentProps {  
 }
 
-const MyEquipment: FC<MyEquipmentProps> = ({}) => {
+const MyEquipment = async ({}: MyEquipmentProps) => {
 
   const nextCookies = cookies();
   const token: RequestCookie | undefined = nextCookies.get('cookieKey')
     let session: DecodedIdToken | null = null;
     if(token){
-    adminAuth.verifyIdToken(token?.value)
+    return adminAuth.verifyIdToken(token?.value)
       .then((tokenSession) => {
         session = tokenSession
+        return (
+          <div>
+            {session ? 
+              <MyEqupmentTable session={session} />
+              : null
+            }
+          </div>)
       }).catch((error) => {
       console.log(error)
+      return null
       })
     }
 
-  return (
-  <div>
-    <MyEqupmentTable session={session} />
-  </div>)
 }
 
 export default MyEquipment

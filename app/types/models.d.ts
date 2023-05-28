@@ -1,5 +1,3 @@
-import { Timestamp } from "firebase/firestore"
-
 interface IClient {
     id?: string,
     firstName: string,

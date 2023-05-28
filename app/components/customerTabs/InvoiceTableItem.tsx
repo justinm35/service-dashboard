@@ -1,19 +1,19 @@
 import { format } from 'date-fns'
 import { FC } from 'react'
 
-interface InvoiceTableItemProps {
-    key: string, 
+interface InvoiceTableItemProps { 
     invoice: any
 }
 
-const InvoiceTableItem: FC<InvoiceTableItemProps> = ({invoice, key}) => {
-  return (
-    <tr key={invoice?.id}>
+const InvoiceTableItem: FC<InvoiceTableItemProps> = ({invoice}) => {
+    const invoiceItem = JSON.parse(invoice)
+    return (
+    <tr key={invoiceItem.id}>
     <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-        {format(new Date(invoice?.createdAt?.seconds * 1000), 'MMM d, yyyy')}
+        {format(new Date(invoiceItem?.createdAt?.seconds * 1000), 'MMM d, yyyy')}
     </td>
     <td className="border-t-0 px-6 font-bold text-gray-600 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-    {invoice?.invoiceURL}
+    {invoiceItem?.invoiceURL}
     </td>
     </tr>
     )

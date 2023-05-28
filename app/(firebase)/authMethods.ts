@@ -1,21 +1,24 @@
 import { firebase_app } from "./firebaseConfig";
 import { UserCredential, sendPasswordResetEmail, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut as signOutSession } from "firebase/auth";
 import { setCookie, deleteCookie } from "cookies-next";
-import { addData } from "./firebaseMethods";
+import { addData, createNewCustomer } from "./firebaseMethods";
 import { adminAuth } from "./firebaseAdminConfig";
 
 export const auth = getAuth(firebase_app);
 
 export async function signUp(email : string, password : string) {
+    let newCustUid: string;
     return  createUserWithEmailAndPassword(auth, email, password)
     .then((result) => {
+        newCustUid = result.user.uid;
         return result.user.getIdToken()
     })
     .then((token) => {
         setCookie('cookieKey', token, {maxAge: 60 * 6 * 24 })
+        return token
+    }).then((token) => {
+        createNewCustomer({firstName: "", lastName: "", email: email, phone: "", notes: "",}, newCustUid)
         return('success')
-    }).then(() => {
-        addData({firstName: "", lastName: "", email: email, serviceDue: false, visits: [], phone: "", notes: "",})
     })
     .catch((err) => {
         console.log(err.code)

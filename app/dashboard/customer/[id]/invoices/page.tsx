@@ -1,20 +1,31 @@
+'use client'
 import { fetchCollection } from '@/app/(firebase)/firebaseFetchMethods'
 import InvoiceTable from '@/app/components/customerTabs/InvoiceTable'
 import { DocumentIcon } from '@heroicons/react/24/outline'
 import { CubeIcon, PlusIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 interface InvoicesProps {
   params: {id: string}
 }
 
 const Invoices= ({params}: InvoicesProps) => {
- 
-  return fetchCollection(`Customers/${params?.id}/Invoices`)
-  .then((resInvoiceData)=> {
-    if(resInvoiceData && resInvoiceData.length !== 0) {
-      return (<InvoiceTable invoiceData={resInvoiceData} params={params}/>)
+    const [invoiceData, setInvoiceData] = useState<any | null>(null)
+  useEffect(()=>{
+    fetchCollection(`Customers/${params?.id}/Invoices`)
+      .then((resInvoiceData)=> {  
+        setInvoiceData(resInvoiceData)
+      })
+      .catch((error)=>{
+        console.log(error)
+        return (<p>{JSON.stringify(error)}</p>)
+      })
+  },[])
+    if(invoiceData === null){
+      return null
+    }if(invoiceData && invoiceData.length !== 0) {
+      return (<InvoiceTable invoiceData={invoiceData} params={params}/>)
     } else{
       return(
         <div className='w-full flex flex-col items-center justify-center text-gray-900'>
@@ -26,11 +37,6 @@ const Invoices= ({params}: InvoicesProps) => {
         </div>
       )
     } 
-  })
-  .catch((err) => {
-    console.log(err)
-    return <p>Error: {JSON.stringify(err)}</p>;
-  })
 }
 
 export default Invoices
