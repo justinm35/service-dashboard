@@ -6,8 +6,6 @@ import Link from 'next/link'
 import { FC, use, useEffect, useState } from 'react'
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import { fetchCollection } from '@/app/(firebase)/firebaseFetchMethods'
-import { IClient } from '@/app/types/models'
-
 
 interface ClientProps {}
 const Client = ({}) => {

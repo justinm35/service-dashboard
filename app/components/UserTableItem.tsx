@@ -2,7 +2,6 @@
 import { ArrowLongRightIcon, ArrowRightOnRectangleIcon, ArrowTopRightOnSquareIcon, CheckBadgeIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { FC, useState } from 'react'
-import { IClient } from '../types/models'
 
 interface UserTableItemProps {}
 
