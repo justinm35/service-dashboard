@@ -24,7 +24,7 @@ const SingleProductPage = ({params}: SingleProductPageProps) => {
         setProduct(product)
       }
       getProduct()
-    }, [])
+    }, [params?.id])
     
   return (
     <div className='h-screen w-full p-10'>

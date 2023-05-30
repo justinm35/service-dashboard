@@ -1,3 +1,8 @@
+declare global {
+    interface Window {
+        Timestamp: Timestamp;
+    }
+  }
 interface IClient {
     id?: string,
     firstName: string,
@@ -36,6 +41,12 @@ interface IServiceRequest {
     equipmentName: string
     problemDesc: string
     problemUrgency: string
+}
+
+interface ICustomerInvoice {
+    id?: string,
+    invoiceDate: Timestamp,
+    invoiceLink?: string, 
 }
 
 declare module 'tailwind-datepicker-react'

@@ -14,7 +14,6 @@ const MyEqupmentTable = ({session}: MyEqupmentTableProps) => {
     const [customerEquipment, setCustomerEquipment] = useState<ICustomerEquipment[] | null>(null)
 
     useEffect(()=>{
-      console.log(session?.uid)
       fetchCollection(`Customers/${session?.uid}/Equipment`)//change this to variable ID
       .then((equipmentData) => {
         setCustomerEquipment(equipmentData)
@@ -22,7 +21,7 @@ const MyEqupmentTable = ({session}: MyEqupmentTableProps) => {
       .catch((error)=>{
         console.log(error)
       })
-    },[])
+    },[session?.uid])
 
     if(customerEquipment){
       return (

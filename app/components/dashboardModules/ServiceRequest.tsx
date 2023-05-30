@@ -1,6 +1,5 @@
 'use client'
 import { fetchCollection, fetchCollectionGroup } from '@/app/(firebase)/firebaseFetchMethods'
-import { IServiceRequest } from '@/app/types/models'
 import { BellAlertIcon } from '@heroicons/react/24/solid'
 import { format } from 'date-fns'
 import { DocumentData } from 'firebase/firestore'
@@ -56,7 +55,7 @@ const ServiceRequest: FC<ServiceRequestProps> = ({}) => {
                 {
                   serviceRequestData.map((request : IServiceRequest)=>{
                     return(
-                    <ServiceRequestItem request={request}/>
+                    <ServiceRequestItem key={request.id} request={request}/>
                     )
                   })
                 }

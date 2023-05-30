@@ -58,6 +58,19 @@ export async function addProduct(data: IProduct, blobData: {manualBlob: Blob | n
         })
 }
 
+interface InvoiceInput extends ICustomerInvoice {
+    invoiceBlob: Blob | null
+}
+export async function addInvoice(data: InvoiceInput  , uid: string) {
+    const invoiceRef = collection(db, `Customers/${uid}/Invoices`)
+    try {
+        const fileLink = await uploadFile("Invoices", data.invoiceBlob)
+        await addDoc(invoiceRef, {invoiceDate: data.invoiceDate, invoiceLink: fileLink});
+    } catch (error) {
+        return error;
+    }
+}
+
 
 export async function uploadFile(fileDir : string, file : Blob | null) : Promise<string>{
     const storageRef = ref(fbStorage, `${fileDir}/${Date.now()}`)
@@ -69,8 +82,8 @@ export async function uploadFile(fileDir : string, file : Blob | null) : Promise
         return res
     })
     .catch((err)=> {
-        return 'error'
         console.log(err)
+        return 'error'
     })
 }
 
