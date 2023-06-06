@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { FC, use, useEffect, useState } from 'react'
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import { fetchCollection } from '@/app/(firebase)/firebaseFetchMethods'
+import { toast } from 'react-toastify'
 
 interface ClientProps {}
 const Client = ({}) => {
@@ -37,7 +38,7 @@ const Client = ({}) => {
                             <input className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-orange-500 focus:border-orange-500 " placeholder="Search by name or email" type="search" id="search" />
                         </div>
                         <div>
-                            <button type="submit" className="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-orange-400 border-orange-500 sm:rounded-none sm:rounded-r-lg hover:bg-orange-500 focus:ring-4 focus:ring-orange-300">Search</button>
+                            <button onClick={()=>toast.warn("This feature is under construction.")} type="submit" className="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-orange-400 border-orange-500 sm:rounded-none sm:rounded-r-lg hover:bg-orange-500 focus:ring-4 focus:ring-orange-300">Search</button>
                         </div>
                     </div>
                 </div>

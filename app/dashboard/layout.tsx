@@ -2,7 +2,7 @@ import SideNav from '@/app/components/nav/SideNav'
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { adminAuth } from '@/app/(firebase)/firebaseAdminConfig';
-import { Suspense } from 'react';
+import ToastProvider from '../helpers/ToastProvider';
 
 interface layoutProps {
   children: React.ReactNode
@@ -31,15 +31,15 @@ const layout = async ({children} : layoutProps) => {
           return(<>  
           <SideNav authStatus={'admin'}/>
           <div className='fixed right-0 w-full h-screen overflow-auto pt-12 lg:pt-0 lg:w-[calc(100vw-16rem)]'>
-              {children}
+              <ToastProvider>{children}</ToastProvider>
           </div>
           </>)
         }else{
-          console.log('access denied')
+          console.log('Customer Access')
           return(<>  
             <SideNav authStatus={'customer'}/>
             <div className='fixed right-0 w-full h-screen overflow-auto pt-12 lg:pt-0 lg:w-[calc(100vw-16rem)]'>
-                {children}
+                <ToastProvider>{children}</ToastProvider>
             </div>
             </>)
         }

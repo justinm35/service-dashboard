@@ -3,6 +3,7 @@ import CustomerDashboard from '../components/CustomerDashboard'
 import { cookies } from 'next/headers';
 import { adminAuth } from '../(firebase)/firebaseAdminConfig';
 import { redirect } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 interface DashboardLangingPageProps {}
 

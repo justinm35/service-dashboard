@@ -1,6 +1,7 @@
 
 import { format } from 'date-fns'
 import { FC } from 'react'
+import { toast } from 'react-toastify'
 
 interface ServiceRequestItemProps {
   request: IServiceRequest
@@ -55,7 +56,7 @@ const ServiceRequestItem: FC<ServiceRequestItemProps> = ({request}) => {
             
             </td>
         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <button className='px-5 py-3 bg-zinc-200 rounded-md'>View</button>
+            <button onClick={()=>toast.warn('This feature is still under construction.', {position: "top-right",})}className='px-5 py-3 bg-zinc-200 rounded-md'>View</button>
         </td>
     </tr>
   )

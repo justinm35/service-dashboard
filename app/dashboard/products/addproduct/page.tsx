@@ -9,6 +9,7 @@ import {addData, addProduct, uploadFile} from '@/app/(firebase)/firebaseMethods'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { convertToBase64 } from '@/app/utils/toBase64'
+import { toast } from 'react-toastify'
 
 interface AddCustomerProps {}
 
@@ -35,10 +36,11 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
     const handleSubmit = (e : React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
         addProduct(formData, blobData)
+            .then(()=>toast.success("New Product Added"))
+            .catch((err)=>{console.log(err);toast.error(err.name + " : "+ err.code)})
         setFormData({image: '', category: '', modelNum: '', name: '', manualLink: '', warrantyLink: ''})
         router.push('/dashboard/products')
     }
-    console.log(formData)
 
 
   return (

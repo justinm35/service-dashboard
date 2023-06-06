@@ -5,6 +5,7 @@ import { FC, useState } from 'react'
 import ConfirmDelModal from './ConfirmDelModal'
 import { updateUser } from '../(firebase)/firebaseMethods'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 interface CustomerInfoSideProps {
   customer: DocumentData | undefined,
@@ -22,6 +23,13 @@ const CustomerInfoSide: FC<CustomerInfoSideProps> = ({customer, params}) => {
     }
     const updateUserData = () => {
         updateUser(params.id, editData)
+        .then(()=>{
+            toast.success("User info updated.")
+        })
+        .catch((err)=>{
+            console.log(err)
+            toast.error(err.name + " : " + err.code)
+        })
         setToggleEditMode(false)
         router.refresh()
     }

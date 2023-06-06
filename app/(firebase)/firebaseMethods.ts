@@ -39,7 +39,7 @@ export async function updateUser(id: string, updatedData : any) {
         const cusotmerRef = doc(db, "Customers", id )
         await updateDoc(cusotmerRef, {...updatedData})   
     } catch (error) {
-        console.log(error)
+        return Promise.reject(error)
     }
 
 }
@@ -54,7 +54,7 @@ export async function addProduct(data: IProduct, blobData: {manualBlob: Blob | n
             return {success: true}
         })
         .catch(error => {
-            return {success: true, error: error}
+            return Promise.reject(error)
         })
 }
 
@@ -93,8 +93,8 @@ export async function addCustomerEquipment(newEquipmentData: ICustomerEquipment,
         .then((data)=>{
             console.log(data)
         })
-        .catch((err)=>{
-            console.log(err)
+        .catch((error)=>{
+            return Promise.reject(error)
         })
     
 }

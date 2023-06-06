@@ -5,6 +5,7 @@ import { FC, useState } from 'react'
 import { MouseEventHandler } from "react"
 import { addInvoice, uploadFile } from "@/app/(firebase)/firebaseMethods"
 import { useRouter } from "next/navigation"
+import { toast } from "react-toastify"
 
 interface AddInvoiceProps {
     customerUid: string;
@@ -26,9 +27,10 @@ const router = useRouter()
                 .then(()=>{
                     setFormData({invoiceDate: "", invoiceBlob: null});
                     router.refresh()
+                    toast.success('Invoice Added')
                 })
                 .catch((err)=>{
-                    console.log(err)
+                    toast.error(JSON.stringify(err))
                 })
                 .finally(()=>{
                     setIsLoading(false);

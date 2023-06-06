@@ -6,6 +6,7 @@ import Link from 'next/link'
 import {  MouseEventHandler, useEffect, useState } from 'react'
 import Datepicker from "tailwind-datepicker-react" 
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 
 interface AddEquipmentProps {
@@ -26,8 +27,12 @@ const AddEquipment = ({params}: AddEquipmentProps) => {
             .then(()=>{
                 setFormData({equipmentName: "", equipmentId: "", serialNum: "", serviceDate: "", purchaseDate: ""})
                 router.push(`dashboard/customer/${params.id}/equipment`)
+                toast.success("Added new customer equipment.")
             })
-            .catch((err)=> {console.log(err)})
+            .catch((err)=> {
+                console.log(err);
+                toast.error(err.name + " : " + err.code);
+            })
                 
     }
 
@@ -36,10 +41,10 @@ const AddEquipment = ({params}: AddEquipmentProps) => {
     const handleClose1 = (state: boolean) => {setShow1(state)}
     const handleClose2 = (state: boolean) => {setShow2(state)}
 
-    const productsRef = collection(db, 'Products')
     const [productsList, setProductsList] = useState<{id: string, name: string}[]>([]);
     console.log(productsList)
     useEffect(() => {
+        const productsRef = collection(db, 'Products')
         getDocs(productsRef)
             .then((products) => {
                 products.forEach((doc) => {setProductsList((prev)=>[...prev, {id: doc.id, name: doc.data().name}])})

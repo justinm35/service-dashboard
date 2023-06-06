@@ -41,9 +41,7 @@ const InvoiceTable: FC<InvoiceTableProps> = ({invoiceData, params}) => {
         <tbody>
         {invoiceData.map((invoice)=>{
             return(
-                <>
                   <InvoiceTableItem invoice={JSON.stringify(invoice)} key={invoice.id}/>
-                </>
             )
         })}
         </tbody>:
