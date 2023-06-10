@@ -4,7 +4,22 @@ import { FC } from 'react'
 interface serviceRequestProps {}
 
 const serviceRequest: FC<serviceRequestProps> = ({}) => {
+    // interface IServiceRequest {
+    //     id: string
+    //     createdAt: Timestamp
+    //     creatorId?: string
+    //     creatorName?: string
+    //     equipmentId: string
+    //     equipmentName: string
+    //     problemDesc: string
+    //     problemUrgency: string
+    // }
+    const handleChange = () => {
 
+    }
+    const handleSubmit = (e : React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+    }
 
   return (
   <div className='w-full h-full flex justify-center'>
@@ -73,7 +88,7 @@ const serviceRequest: FC<serviceRequestProps> = ({}) => {
                   <textarea id="description" rows={8} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your description here"></textarea>
               </div>
           </div>
-          <button type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-orange-400 rounded-lg focus:ring-4 focus:ring-orange-300 hover:bg-orange-500 transition">
+          <button  onClick={(e)=>handleSubmit(e)} type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-orange-400 rounded-lg focus:ring-4 focus:ring-orange-300 hover:bg-orange-500 transition">
               Send Request
           </button>
       </form>

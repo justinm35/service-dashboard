@@ -98,3 +98,13 @@ export async function addCustomerEquipment(newEquipmentData: ICustomerEquipment,
         })
     
 }
+
+
+export async function addServiceRequest(customerId : string, formData : IServiceRequest) {
+    const serviceRequestRef = collection(db, `/Customers/${customerId}/ServiceRequests`)
+    try {
+        await addDoc(serviceRequestRef, formData);
+    } catch (error) {
+        return Promise.reject(error)
+    }
+}
