@@ -11,8 +11,18 @@ export async function addData(data : IClient) { // Is this allowed??
             return {success: true}
         })
         .catch(error => {
-            return {success: true, error: error}
+            return {success: false, error: error}
         })
+}
+
+export async function editNote(data: string | null) {
+    try {
+        const noteRef = doc(db, "Notepad", "main");
+        await updateDoc(noteRef, {data});
+        return {success: true}
+    } catch (error) {
+        return Promise.reject(error)
+    }
 }
 
 export async function createNewCustomer(data: IClient, uid: string) {
@@ -20,7 +30,7 @@ export async function createNewCustomer(data: IClient, uid: string) {
         await setDoc(doc(db, "Customers", uid), data)   
         return {success: true}
     } catch (error) {
-        return {success: true, error: error}
+        return {success: false, error: error}
     }
 }
 

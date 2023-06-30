@@ -49,8 +49,7 @@ const Client = ({}) => {
                         <th scope="col" className="px-6 py-4 font-medium text-gray-900 flex items-center">Name
                             <button className='ml-1 p-1 border border-gray-300/70 rounded-md text-gray-500'><ChevronUpIcon className='w-2 h-2'/><ChevronDownIcon className='w-2 h-2'/></button>
                         </th>
-                        <th scope="col" className="px-6 py-4 font-medium text-gray-900">Phone</th>
-                        <th scope="col" className="px-6 py-4 font-medium text-gray-900">Equipment Qty.</th>
+                        <th scope="col" className="px-6 py-4 font-medium text-gray-900 pr-96">Phone</th>
                         <th scope="col" className="px-6 py-4 font-medium text-gray-900"></th>
                         </tr>
                     </thead>

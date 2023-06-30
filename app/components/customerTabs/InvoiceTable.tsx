@@ -26,6 +26,7 @@ const InvoiceTable: FC<InvoiceTableProps> = ({invoiceData, params}) => {
     </div>
 
     <div className="block w-full overflow-x-auto">
+    {invoiceData.length > 0 ? 
       <table className="items-center bg-transparent w-full border-collapse ">
         <thead>
           <tr>
@@ -37,24 +38,22 @@ const InvoiceTable: FC<InvoiceTableProps> = ({invoiceData, params}) => {
             </th>
           </tr>
         </thead>
-        {invoiceData.length > 0 ? 
         <tbody>
         {invoiceData.map((invoice)=>{
             return(
                   <InvoiceTableItem invoice={JSON.stringify(invoice)} key={invoice.id}/>
             )
         })}
-        </tbody>:
-        <div className=' flex flex-col w-full items-center justify-center'>
+        </tbody>
+      </table>:
+      <div className=' flex flex-col w-full items-center justify-center'>
         <DocumentIcon className='w-14 h-14 text-gray-300 mt-32'/>
         <h3 className='font-semibold text-lg mb-4'>Customer has no invoices</h3>
         <p className='opacity-40 mb-5'>Any invoices owned by this customer will be listed here.</p>
         {/* <Link href="#" className=' flex items-center max-w-md w-42 py-2 px-4 text-sm font-medium text-center text-white border cursor-pointer bg-orange-400 border-orange-500 rounded-lg hover:bg-orange-500 focus:ring-4 focus:ring-orange-300'>
         <PlusIcon className="w-6 h-6 mr-3"/>Add Invoice</Link> */}
         </div>
-      }
-
-      </table>
+    }
     </div>
   </div>)
 }
