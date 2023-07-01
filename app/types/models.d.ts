@@ -10,7 +10,8 @@ interface IClient {
     email: string,
     phone: string,
     notes?: string,
-    verified?: boolean
+    verified?: boolean,
+    linkUID?: string,
 }
 
 interface IProduct {

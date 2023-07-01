@@ -25,12 +25,12 @@ export async function editNote(data: string | null) {
     }
 }
 
-export async function createNewCustomer(data: IClient, uid: string) {
+export async function createNewCustomer(data: IClient) {
+    const customerRef = collection(db, "Customers");
     try {
-        await setDoc(doc(db, "Customers", uid), data)   
-        return {success: true}
+        await addDoc(customerRef, data)
     } catch (error) {
-        return {success: false, error: error}
+        return Promise.reject({success: false, error: error}) 
     }
 }
 

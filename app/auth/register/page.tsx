@@ -3,8 +3,9 @@ import { FC, ReactEventHandler, useState, MouseEvent } from 'react'
 import TASlogo from '/public/TAS-logo.webp'
 import Image from 'next/image'
 import Link from 'next/link'
-import { signUp } from '@/app/(firebase)/authMethods'
+import { signUp, signUp2 } from '@/app/(firebase)/authMethods'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 
 interface pageProps {
@@ -31,12 +32,13 @@ const Register: FC<pageProps> = ({}) => {
             setErrorState("Password's dont match")
             return;
         }
-        signUp(formData.email, formData.password)
+        signUp2(formData.email, formData.password)
             .then(() => {
                 router.refresh()
                 router.push('/dashboard')
             })
             .catch((err) => {
+                toast.error("Error: " + err)
                 setErrorState(err.message)
             })
     }

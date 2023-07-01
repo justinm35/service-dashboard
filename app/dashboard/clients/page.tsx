@@ -55,7 +55,7 @@ const Client = ({}) => {
                     </thead>
                     <tbody className="divide-y divide-gray-100 border-t border-gray-100">
                         {customerData.map((customer: IClient) => {
-                            return <UserTableItem key={customer.id} client={{firstName: customer.firstName,lastName: customer.lastName, email: customer.email, phone: customer.phone, id: customer.id, verified: customer.verified}} />
+                            return <UserTableItem key={customer.id} client={{firstName: customer.firstName,lastName: customer.lastName, email: customer.email, phone: customer.phone, id: customer.id, verified: customer.verified, linkUID: customer.linkUID}} />
                         })}
                     </tbody>
                     </table>
