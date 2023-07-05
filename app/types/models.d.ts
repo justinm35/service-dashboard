@@ -47,7 +47,33 @@ interface IServiceRequest {
 interface ICustomerInvoice {
     id?: string,
     invoiceDate: Timestamp,
-    invoiceLink?: string, 
+    invoiceLink?: string,
+}
+interface loadTestData {
+    capacity: string,
+    facilityNum: string,
+    brakesSecure: string,
+    frameHardware: string,
+    seatAndBack: string,
+    legSupport: string,
+    tiltAssem: string,
+    power: string,
+    bucketMount: string,
+    safteyBelt: string,
+    label: string
+}
+interface IServiceHistory {
+    id?: string,
+    technician: string,
+    commodeBrand: string,
+    serialNum: string,
+    assetNum: string,
+    client: string,
+    address: string,
+    room: string,
+    date: Timestamp,
+    loadTestData: loadTestData[],
+    notes: string
 }
 
 

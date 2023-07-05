@@ -30,7 +30,7 @@ export async function createNewCustomer(data: IClient) {
     try {
         await addDoc(customerRef, data)
     } catch (error) {
-        return Promise.reject({success: false, error: error}) 
+        return Promise.reject({success: false, error: error})
     }
 }
 
@@ -47,7 +47,7 @@ export async function deleteDocument(id: string) {
 export async function updateUser(id: string, updatedData : any) {
     try {
         const cusotmerRef = doc(db, "Customers", id )
-        await updateDoc(cusotmerRef, {...updatedData})   
+        await updateDoc(cusotmerRef, {...updatedData})
     } catch (error) {
         return Promise.reject(error)
     }
@@ -106,10 +106,17 @@ export async function addCustomerEquipment(newEquipmentData: ICustomerEquipment,
         .catch((error)=>{
             return Promise.reject(error)
         })
-    
+
 }
 
+export async function addServiceHistory(customerId: string, formData: IServiceHistory) { //Fix type
+    const serviceHistoryRef = collection(db, `Customers/${customerId}/ServiceHistory`)
+    try {
+        await addDoc(serviceHistoryRef, formData)
+    } catch (error) {
 
+    }
+}
 export async function addServiceRequest(customerId : string, formData : IServiceRequest) {
     const serviceRequestRef = collection(db, `/Customers/${customerId}/ServiceRequests`)
     try {
