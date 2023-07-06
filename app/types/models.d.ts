@@ -49,7 +49,7 @@ interface ICustomerInvoice {
     invoiceDate: Timestamp,
     invoiceLink?: string,
 }
-interface loadTestData {
+interface ILoadTestData {
     capacity: string,
     facilityNum: string,
     brakesSecure: string,
@@ -72,7 +72,7 @@ interface IServiceHistory {
     address: string,
     room: string,
     date: Timestamp,
-    loadTestData: loadTestData[],
+    loadTestData: ILoadTestData[],
     notes: string
 }
 

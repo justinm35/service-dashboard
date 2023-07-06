@@ -31,9 +31,13 @@ const AddService =  ({ params }: AddServiceProps) => {
         setFormData({...formData, [e.currentTarget.name] : e.currentTarget.value})
     }
     const handleTableChange = (e : React.ChangeEvent<HTMLTextAreaElement>) => {
-        setFormData({...formData, [loadTestData[0][e.currentTarget.name]] : e.currentTarget.value})
+        const newData : IServiceHistory = { ...formData };
+        newData.loadTestData = [...formData.loadTestData];
+        (newData.loadTestData[0] as any)[e.currentTarget.name] = e.currentTarget.value;
+        setFormData(newData);
     }
     console.log(formData)
+
     const[show1, setShow1] = useState<boolean>(false)
     const handleClose1 = (state: boolean) => {setShow1(state)}
 
