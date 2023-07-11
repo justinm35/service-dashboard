@@ -7,7 +7,7 @@ import { doc, getDocFromCache } from "firebase/firestore";
 import { FC } from 'react'
 
 interface EquipmentTableItemProps {
-  key: string, 
+  key: string,
   equipment: any
 }
 
@@ -29,7 +29,8 @@ const EquipmentTableItem = async ({equipment, key} : EquipmentTableItemProps) =>
     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
     {format(new Date(equipment.purchaseDate.seconds * 1000), 'MMM d, yyyy')}
     </td>
-</tr>)
+    </tr>
+  )
 }
 
 export default EquipmentTableItem
