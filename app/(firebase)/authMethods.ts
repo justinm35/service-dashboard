@@ -73,9 +73,10 @@ export async function signUp2(email: string, password: string) {
 }
 
 export async function signIn(email: string, password: string) {
-    
+
     return signInWithEmailAndPassword(auth, email, password)
         .then((result) => {
+            result.user.refreshToken
             return result.user.getIdToken()
         })
         .then((token) => {
@@ -92,9 +93,7 @@ export async function signIn(email: string, password: string) {
                     throw new Error ('Hmm, something went wrong, try again!')
             }
         })
-        
 }
-
 export async function resetPass(email : string) {
     return sendPasswordResetEmail(auth, email)
         .then(() => {
@@ -114,7 +113,7 @@ export async function signOut() {
     let result = null,
         error = null;
     try {
-        result = await signOutSession(auth) 
+        result = await signOutSession(auth)
         deleteCookie('cookieKey')
     } catch (e) {
         error = e

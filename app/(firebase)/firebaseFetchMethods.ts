@@ -1,6 +1,6 @@
 import { cache, useRef } from "react";
 import { db, fbStorage } from "./firebaseConfig";
-import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDocumentSnapshot, DocumentData, QuerySnapshot, deleteDoc, updateDoc, collectionGroup } from "firebase/firestore";
+import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDocumentSnapshot, DocumentData, QuerySnapshot, deleteDoc, updateDoc, collectionGroup, where, query, Timestamp } from "firebase/firestore";
 
 /**
  * This will return a the entire collection from firebase using the input params
@@ -17,7 +17,7 @@ export const fetchCollection = cache(async (URI: string):Promise<any>=> {
             collectionData.push({id: doc.id, ...doc.data()})
         })
         return collectionData
-    } catch (error : undefined | any) { 
+    } catch (error : undefined | any) {
         console.log(error)
         return error
     }
@@ -31,7 +31,7 @@ export const fetchCollectionGroup = cache(async (URI: string):Promise<any>=> {
             collectionData.push({id: doc.id, creatorId: doc.ref.parent.parent, ...doc.data()})
         })
         return collectionData
-    } catch (error : undefined | any) { 
+    } catch (error : undefined | any) {
         console.log(error)
         return error
     }
@@ -43,10 +43,27 @@ export const fetchDocumentById = cache(async (collectionURI: string, docId: stri
     try {
         const snapshot = await getDoc(doc(db, collectionURI, docId))
         return snapshot.data()
-    } catch (error : undefined | any) { 
+    } catch (error : undefined | any) {
         console.log(error)
         return error
     }
 
 })
 
+
+export const fetchEquipmentDueForService = cache( async ():Promise<any>=> {
+    const currentDate = Timestamp.now();
+    try {
+        const servicableEquipment = query(collectionGroup(db, "Equipment"), where('serviceDate', '<=', currentDate))
+        let collectionData: any = [];
+        const querySnapshot = await getDocs(servicableEquipment)
+        querySnapshot.forEach((doc) => {
+            collectionData.push({id: doc.id, creatorId: doc.ref.parent.parent, ...doc.data()})
+        })
+        return collectionData
+    } catch (error : undefined | any) {
+        console.log(error)
+        return error
+    }
+
+})

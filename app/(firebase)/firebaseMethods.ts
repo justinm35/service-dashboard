@@ -1,6 +1,7 @@
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, fbStorage } from "./firebaseConfig";
 import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDocumentSnapshot, DocumentData, QuerySnapshot, deleteDoc, updateDoc } from "firebase/firestore";
+import { ICustomerEquipment } from "../types/globalScoped";
 
 
 export async function addData(data : IClient) { // Is this allowed??

@@ -3,6 +3,8 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { adminAuth } from '@/app/(firebase)/firebaseAdminConfig';
 import ToastProvider from '../helpers/ToastProvider';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../(firebase)/authMethods';
 
 interface layoutProps {
   children: React.ReactNode
@@ -12,7 +14,10 @@ interface layoutProps {
 
 const layout = async ({children} : layoutProps) => {
 
-
+  onAuthStateChanged(auth, (user) => {
+    const idToken = user?.getIdToken()
+    console.log(`Auth State Changed, new token = ${idToken}`)
+  })
   const nextCookies = cookies();
   const token = nextCookies.get('cookieKey')
   let session;
@@ -28,7 +33,7 @@ const layout = async ({children} : layoutProps) => {
         return decodedToken
       }).then((claims)=>{
         if (claims.admin === true) {
-          return(<>  
+          return(<>
           <SideNav authStatus={'admin'}/>
           <div className='fixed right-0 w-full h-screen overflow-auto pt-12 lg:pt-0 lg:w-[calc(100vw-16rem)]'>
               <ToastProvider>{children}</ToastProvider>
@@ -36,7 +41,7 @@ const layout = async ({children} : layoutProps) => {
           </>)
         }else{
           console.log('Customer Access')
-          return(<>  
+          return(<>
             <SideNav authStatus={'customer'}/>
             <div className='fixed right-0 w-full h-screen overflow-auto pt-12 lg:pt-0 lg:w-[calc(100vw-16rem)]'>
                 <ToastProvider>{children}</ToastProvider>
@@ -51,7 +56,7 @@ const layout = async ({children} : layoutProps) => {
 
 
   // return (
-  //   <>  
+  //   <>
   //       <SideNav authStatus={}/>
   //       <div className='fixed right-0 w-full h-screen overflow-auto pt-12 lg:pt-0 lg:w-[calc(100vw-16rem)]'>
   //           {children}
@@ -60,5 +65,5 @@ const layout = async ({children} : layoutProps) => {
   //   )
 }
 
-export default layout 
+export default layout
 

@@ -3,9 +3,10 @@ import ServiceRequest from './dashboardModules/ServiceRequest'
 import Notes from './dashboardModules/Notes'
 import CustomerCount from './dashboardModules/CustomerCount'
 import EquipmentCount from './dashboardModules/EquipmentCount'
+import EquipmentDueForService from './dashboardModules/EquipmentDueForService'
 
 interface AdminDashboardProps {
-  
+
 }
 
 const AdminDashboard: FC<AdminDashboardProps> = ({}) => {
@@ -15,12 +16,9 @@ const AdminDashboard: FC<AdminDashboardProps> = ({}) => {
       <div className='rounded-lg bg-white p-4 shadow-xl transition-shadow hover:shadow-lg sm:p-6 lg:p-8 flex flex-col justify-start col-span-2 row-span-2 text-gray-800'>
         <ServiceRequest />
       </div>
-    
-      <div className='rounded-lg bg-white p-4 shadow-xl transition-shadow hover:shadow-lg sm:p-6 lg:p-8 '>
-        <div className='w-full flex justify-between border border-zinc-100 border-l-0 border-r-0 border-t-0 pb-2'>
-          <h3 className='text-2xl font-bold text-gray-700'>Equipment Due for Service</h3>
-        </div>
-        <h1>Johnny</h1>
+
+      <div className='rounded-lg bg-white  shadow-xl transition-shadow hover:shadow-lg '>
+        <EquipmentDueForService/>
       </div>
 
       <div className='rounded-lg bg-white p-4 shadow-xl transition-shadow hover:shadow-lg sm:p-6 lg:p-8 '>

@@ -1,3 +1,4 @@
+
 declare global {
     interface Window {
         Timestamp: Timestamp;
@@ -24,14 +25,6 @@ interface IProduct {
     warrantyLink?: string,
 }
 
-interface ICustomerEquipment {
-    id?: string,
-    equipmentName?: string,
-    equipmentId : string,
-    purchaseDate: string,
-    serialNum: string,
-    serviceDate: string,
-}
 
 interface IServiceRequest {
     id: string

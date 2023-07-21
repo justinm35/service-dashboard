@@ -46,7 +46,6 @@ const ServiceHistoryTable: FC<ServiceHistoryTableProps> = ({serviceHistoryData, 
         </thead>
         <tbody>
           {serviceHistoryData.map((data: IServiceHistory) => {
-
             return(
               <ServiceHistoryTableItem setDisplayedServiceData={setDisplayedServiceData} serviceHistoryRecord={data} />
             )
