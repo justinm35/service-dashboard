@@ -58,7 +58,7 @@ export async function signUp2(email: string, password: string) {
             await updateDoc(customerRef, {linkUID: newCustUid});
         }else{
             //create new internal user account
-            createNewCustomer({firstName: "", lastName: "", email: email, phone: "", notes: "", linkUID: newCustUid})
+            createNewCustomer({firstName: "", lastName: "", address: "", email: email, phone: "", notes: "", linkUID: newCustUid})
         }
     } catch (error: any) {
         switch (error.code) {

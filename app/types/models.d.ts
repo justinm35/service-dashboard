@@ -10,6 +10,7 @@ interface IClient {
     lastName: string,
     email: string,
     phone: string,
+    address: string,
     notes?: string,
     verified?: boolean,
     linkUID?: string,

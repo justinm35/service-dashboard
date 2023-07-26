@@ -3,8 +3,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { adminAuth } from '@/app/(firebase)/firebaseAdminConfig';
 import ToastProvider from '../helpers/ToastProvider';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../(firebase)/authMethods';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 interface layoutProps {
   children: React.ReactNode
@@ -13,10 +12,19 @@ interface layoutProps {
 
 
 const layout = async ({children} : layoutProps) => {
-
+  const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
-    const idToken = user?.getIdToken()
-    console.log(`Auth State Changed, new token = ${idToken}`)
+    if(user) {
+      user.getIdToken(true)
+        .then((token) => {
+          console.log(`Auth State Changed, new token = ${token}`)
+        })
+        .catch((err) => {
+          console.log(`Error: ${err}`)
+        })
+    }else {
+      console.log('No user?/')
+    }
   })
   const nextCookies = cookies();
   const token = nextCookies.get('cookieKey')

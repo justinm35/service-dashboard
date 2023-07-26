@@ -14,15 +14,15 @@ interface AddCustomerProps {}
 const AddCustomer: FC<AddCustomerProps> = ({}) => {
     const router = useRouter()
 
-    const [formData, setFormData] = useState({firstName: "", lastName: "", email: "", serviceDue: false, visits: [], phone: "", notes: ""})
+    const [formData, setFormData] = useState({firstName: "", lastName: "", address: "", email: "", serviceDue: false, visits: [], phone: "", notes: ""})
     const handleChange = (e : React.FormEvent<HTMLInputElement>) => {
-        setFormData({...formData, [e.currentTarget.name] : e.currentTarget.value})  
+        setFormData({...formData, [e.currentTarget.name] : e.currentTarget.value})
     }
     console.log(formData)
     const handleSubmit = (e : React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
         const res = addData({...formData})
-        setFormData({firstName: "", lastName: "", email: "", serviceDue: false, visits: [], phone: "", notes: ""});
+        setFormData({firstName: "", lastName: "", address: "",  email: "", serviceDue: false, visits: [], phone: "", notes: ""});
         router.push('/dashboard/clients')
     }
 
@@ -49,6 +49,10 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
                 <div className="w-full">
                     <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Phone Number</label>
                     <input value={formData.phone} onChange={handleChange} name="phone" id="phone" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="444-444-4444" />
+                </div>
+                <div className="w-full">
+                    <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 ">Address</label>
+                    <input value={formData.address} onChange={handleChange} name="address" id="address" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="398 Church St, ON" />
                 </div>
                 {/* <div>
                     <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 ">Category</label>

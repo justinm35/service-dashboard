@@ -17,9 +17,9 @@ const CustomerInfoSide: FC<CustomerInfoSideProps> = ({customer, params}) => {
     const [toggleDeleteModal, setToggleDeleteModal] = useState<boolean>(false)
     const [toggleEditMode, setToggleEditMode] = useState<boolean>(false)
     const [editData, setEditData] = useState<any>({firstName : customer?.firstName, lastName: customer?.lastName, email: customer?.email, phone: customer?.phone, notes: customer?.notes})
-    
+
     const handleChange = (e : React.FormEvent<HTMLInputElement>) => {
-        setEditData({...editData, [e.currentTarget.name] : e.currentTarget.value})  
+        setEditData({...editData, [e.currentTarget.name] : e.currentTarget.value})
     }
     const updateUserData = () => {
         updateUser(params.id, editData)
@@ -33,7 +33,7 @@ const CustomerInfoSide: FC<CustomerInfoSideProps> = ({customer, params}) => {
         setToggleEditMode(false)
         router.refresh()
     }
-  
+
     return (
     <>
     <div className='w-80 h-fit bg-white rounded-lg shadow-sm p-6 text-gray-900 flex flex-col justify-between'>
@@ -43,25 +43,27 @@ const CustomerInfoSide: FC<CustomerInfoSideProps> = ({customer, params}) => {
                 <div className='w-full bg-gray-400 h-0.5 opacity-20 mx-auto my-2'/>
                 <div className='flex flex-col'>
                     { toggleEditMode ?<>
-                    <h3 className='text-sm font-medium text-gray-700 opacity-60 pb-1'>First Name</h3>
-                    <input value={editData.firstName} name="firstName" onChange={handleChange}  className='text-md font-medium mb-2 p-2 border border-gray-300 rounded-md'/>
-                    <h3 className='text-sm font-medium text-gray-700 opacity-60 pb-1'>Last Name</h3>
-                    <input value={editData.lastName} name="lastName" onChange={handleChange} className='text-md font-medium mb-2 p-2 border border-gray-300 rounded-md'/>
-                    <h3 className='text-sm font-medium text-gray-700 opacity-60 pb-1'>E-mail</h3>
-                    <input value={editData.email} name="email" onChange={handleChange} className='text-md font-medium mb-2 p-2 border border-gray-300 rounded-md'/>
-                    <h3 className='text-sm font-medium text-gray-700 opacity-60 pb-1'>Phone</h3>
-                    <input value={editData.phone} name="phone" onChange={handleChange} className='text-md font-medium mb-2 p-2 border border-gray-300 rounded-md'/>
-                    <h3 className='text-sm font-medium text-gray-700 opacity-60 pb-1'>Notes</h3>
-                    <input value={editData.notes} name="notes" onChange={handleChange} className='text-md font-medium mb-2 p-2 border border-gray-300 rounded-md'/></>
+                    <h3 className='text-sm text-gray-700 opacity-60 pb-1'>First Name</h3>
+                    <input value={editData.firstName} name="firstName" onChange={handleChange}  className='text-sm mb-2 p-2 border border-gray-300 rounded-md'/>
+                    <h3 className='text-sm text-gray-700 opacity-60 pb-1'>Last Name</h3>
+                    <input value={editData.lastName} name="lastName" onChange={handleChange} className='text-sm mb-2 p-2 border border-gray-300 rounded-md'/>
+                    <h3 className='text-sm text-gray-700 opacity-60 pb-1'>E-mail</h3>
+                    <input value={editData.email} name="email" onChange={handleChange} className='text-sm mb-2 p-2 border border-gray-300 rounded-md'/>
+                    <h3 className='text-sm text-gray-700 opacity-60 pb-1'>Phone</h3>
+                    <input value={editData.phone} name="phone" onChange={handleChange} className='text-sm mb-2 p-2 border border-gray-300 rounded-md'/>
+                    <h3 className='text-sm text-gray-700 opacity-60 pb-1'>Notes</h3>
+                    <input value={editData.notes} name="notes" onChange={handleChange} className='text-sm mb-2 p-2 border border-gray-300 rounded-md'/></>
                     :<>
                     <h3 className='text-sm font-medium text-gray-700 opacity-60'>Name</h3>
-                    <p className='text-md font-medium pb-2'>{customer?.firstName + " " + customer?.lastName}</p>
+                    <p className='text-md font-small pb-2'>{customer?.firstName + " " + customer?.lastName}</p>
                     <h3 className='text-sm font-medium text-gray-700 opacity-60'>E-mail</h3>
-                    <p className='text-md font-medium pb-2'>{customer?.email}</p>
+                    <p className='text-md font-small pb-2'>{customer?.email}</p>
                     <h3 className='text-sm font-medium text-gray-700 opacity-60'>Phone</h3>
-                    <p className='text-md font-medium pb-2'>{customer?.phone}</p>
+                    <p className='text-md font-small pb-2'>{customer?.phone}</p>
+                    <h3 className='text-sm font-medium text-gray-700 opacity-60'>Address</h3>
+                    <p className='text-md font-small pb-2'>{customer?.address}</p>
                     <h3 className='text-sm font-medium text-gray-700 opacity-60'>Notes</h3>
-                    <p className='text-md font-medium pb-2'>{customer?.notes ? customer?.notes : "N/A"}</p></>
+                    <p className='text-md font-small pb-2'>{customer?.notes ? customer?.notes : "N/A"}</p></>
                     }
                 </div>
             </div>
