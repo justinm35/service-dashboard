@@ -1,6 +1,6 @@
 import { cache, useRef } from "react";
 import { db, fbStorage } from "./firebaseConfig";
-import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDocumentSnapshot, DocumentData, QuerySnapshot, deleteDoc, updateDoc, collectionGroup, where, query, Timestamp } from "firebase/firestore";
+import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs, QueryDocumentSnapshot, DocumentData, QuerySnapshot, deleteDoc, updateDoc, collectionGroup, where, query, Timestamp, AggregateQuerySnapshot, AggregateField, getCountFromServer } from "firebase/firestore";
 
 /**
  * This will return a the entire collection from firebase using the input params
@@ -32,7 +32,6 @@ export const fetchCollectionGroup = cache(async (URI: string):Promise<any>=> {
         })
         return collectionData
     } catch (error : undefined | any) {
-        console.log(error)
         return error
     }
 
@@ -44,8 +43,7 @@ export const fetchDocumentById = cache(async (collectionURI: string, docId: stri
         const snapshot = await getDoc(doc(db, collectionURI, docId))
         return snapshot.data()
     } catch (error : undefined | any) {
-        console.log(error)
-        return error
+        return Promise.reject({success: false, error: error})
     }
 
 })
@@ -66,4 +64,13 @@ export const fetchEquipmentDueForService = cache( async ():Promise<any>=> {
         return error
     }
 
+})
+
+export const fetchCollectionQuantity = cache( async (collectionURI: string): Promise<any> => {
+    try {
+        const customerColl = collection(db, collectionURI)
+        return (await getCountFromServer(customerColl)).data().count
+    } catch (error) {
+        Promise.reject(error)
+    }
 })

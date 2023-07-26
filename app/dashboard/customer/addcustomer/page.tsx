@@ -70,7 +70,7 @@ const AddCustomer: FC<AddCustomerProps> = ({}) => {
                 </div>
             </div>
             <div className='w-full flex justify-between'>
-                <Link href="/dashboard/clients">
+                <Link href="/dashboard/customer">
                     <button className="transition inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-gray-900 bg-gray-200 rounded-lg focus:ring-4 focus:ring-zinc-200 hover:bg-gray-300">
                         <ArrowLeftIcon className='h-4 w-4 text-gray-900 mr-1'/>Back
                     </button>

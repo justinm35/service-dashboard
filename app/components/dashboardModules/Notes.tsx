@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import Textarea from 'react-expanding-textarea'
 
 interface NotesProps {
-  
+
 }
 
 const Notes: FC<NotesProps> = ({}) => {
@@ -31,7 +31,7 @@ const Notes: FC<NotesProps> = ({}) => {
     <div className='w-full flex justify-between border border-zinc-100 border-l-0 border-r-0 border-t-0 pb-2 mb-2'>
         <h3 className='text-2xl font-bold text-gray-700'>Notes</h3>
     {toggleEditMode ?
-        <div> 
+        <div>
           <button onClick={()=>changeNote()}>
             <CheckCircleIcon className='w-8 h-8 text-green-500 hover:text-green-700 transition'/>
           </button>
@@ -39,22 +39,22 @@ const Notes: FC<NotesProps> = ({}) => {
             <XCircleIcon className='w-8 h-8 text-red-500 hover:text-red-700 transition'/>
           </button>
         </div>
-        : 
+        :
         <button onClick={()=>setToggleEditMode(true)} className='text-zinc-500 hover:text-zinc-700'>
           <PencilSquareIcon className='w-6 h-6 transition'/>
         </button>}
     </div>
-    {toggleEditMode ? 
+    {toggleEditMode ?
     <Textarea
-      className='w-full max-h-full overflow-y-auto text-gray-500 font-medium text-md p-3 outline-1 outline-gray-100 rounded-md'
+      className='w-full max-h-full overflow-y-auto text-gray-500 font-medium text-sm p-3 outline-1 outline-gray-100 rounded-md'
       defaultValue={noteData as string}
       id="notepad"
       maxLength={3000}
       name="notepad"
       onChange={(e)=>setNoteData(e.currentTarget.value)}
       placeholder="Enter notes..."/>
-    : 
-      <p  className='w-full max-h-full overflow-y-auto text-gray-500 font-medium text-md p-3 font-sans outline-1 outline-gray-100 whitespace-pre-wrap'>
+    :
+      <p  className='w-full max-h-full overflow-y-auto text-gray-500 font-medium text-sm p-3 font-sans outline-1 outline-gray-100 whitespace-pre-wrap'>
         {noteData}
       </p>}
   </div>

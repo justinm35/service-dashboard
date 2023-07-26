@@ -1,6 +1,6 @@
 "use client"
 import { db } from '@/app/(firebase)/firebaseConfig'
-import UserTableItem from '@/app/components/UserTableItem'
+import UserTableItem from '@/app/dashboard/customer/CustomerTableItem'
 import { DocumentData, collection, getDoc, getDocs } from 'firebase/firestore'
 import Link from 'next/link'
 import { FC, use, useEffect, useState } from 'react'
@@ -31,7 +31,7 @@ const Client = ({}) => {
             <div className='w-full h-full p-10'>
                 <h2 className='font-semibold text-2xl text-gray-500 pb-6'>All Customers</h2>
                 <div className='w-full flex justify-between mb-3'>
-                    <Link href="/dashboard/clients/addcustomer" className=' max-w-md w-42 py-3 px-5 text-sm font-medium text-center text-white border cursor-pointer bg-orange-400 border-orange-500 rounded-lg hover:bg-orange-500 focus:ring-4 focus:ring-orange-300'>New Customer</Link>
+                    <Link href="/dashboard/customer/addcustomer" className=' max-w-md w-42 py-3 px-5 text-sm font-medium text-center text-white border cursor-pointer bg-orange-400 border-orange-500 rounded-lg hover:bg-orange-500 focus:ring-4 focus:ring-orange-300'>New Customer</Link>
                     <div className="items-center space-y-4 sm:flex sm:space-y-0">
                         <div className="relative w-full">
                             <label htmlFor="email" className="hidden mb-2 text-sm font-medium text-gray-900 ">Email address</label>
@@ -49,7 +49,8 @@ const Client = ({}) => {
                         <th scope="col" className="px-6 py-4 font-medium text-gray-900 flex items-center">Name
                             <button className='ml-1 p-1 border border-gray-300/70 rounded-md text-gray-500'><ChevronUpIcon className='w-2 h-2'/><ChevronDownIcon className='w-2 h-2'/></button>
                         </th>
-                        <th scope="col" className="px-6 py-4 font-medium text-gray-900 pr-96">Phone</th>
+                        <th scope="col" className="px-6 py-4 font-medium text-gray-900">Phone</th>
+                        <th scope="col" className="px-6 py-4 font-medium text-gray-900">Address</th>
                         <th scope="col" className="px-6 py-4 font-medium text-gray-900"></th>
                         </tr>
                     </thead>
@@ -61,7 +62,7 @@ const Client = ({}) => {
                     </table>
                 </div>
         </div>
-            )
+        )
     }
 }
 

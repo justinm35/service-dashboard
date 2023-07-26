@@ -1,6 +1,7 @@
 'use client'
 import { fetchEquipmentDueForService } from '@/app/(firebase)/firebaseFetchMethods'
 import { ICustomerEquipment } from '@/app/types/globalScoped'
+import { format, formatDistance, formatDistanceToNow } from 'date-fns'
 import { FC, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
@@ -36,32 +37,25 @@ return (
           <thead className="thead-light ">
             <tr>
               <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                Customer
+                Equipment
               </th>
-              <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                Visitors
+              <th className="px-6 bg-blueGray-50 text-blueGray-700 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Date to now
               </th>
-              <th className="px-6 bg-blueGray-50 text-blueGray-700 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"></th>
             </tr>
           </thead>
           <tbody>
             {servicableEquipmentData?.map((equipmentData)=> {
+              let distanceInWords = formatDistanceToNow(new Date(equipmentData.serviceDate.seconds * 1000))
                 return(
                     <tr key={equipmentData.id}>
-                    <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                    <th className="flex flex-col border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left truncate">
                         {equipmentData.equipmentName}
+                        <span className="font-normal text-xs text-gray-400">{equipmentData.customerName}</span>
                     </th>
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                        1,480
-                    </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <div className="flex items-center">
-                        <span className="mr-2">60%</span>
-                        <div className="relative w-full">
-                            <div className="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                            <div  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
-                            </div>
-                        </div>
+                        <span className="mr-2">{distanceInWords}</span>
                         </div>
                     </td>
                     </tr>

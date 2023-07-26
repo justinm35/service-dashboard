@@ -1,4 +1,4 @@
-import { DocumentReference } from "firebase/firestore";
+import { DocumentReference, Timestamp } from "firebase/firestore";
 
 export interface ICustomerEquipment {
     id?: string,
@@ -6,7 +6,7 @@ export interface ICustomerEquipment {
     equipmentId : string,
     purchaseDate: string,
     serialNum: string,
-    serviceDate: string,
+    serviceDate: Timestamp,
     customerRef?: DocumentReference
     customerName?: string,
 }

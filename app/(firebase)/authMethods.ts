@@ -2,39 +2,38 @@ import { db, firebase_app } from "./firebaseConfig";
 import { UserCredential, sendPasswordResetEmail, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut as signOutSession } from "firebase/auth";
 import { setCookie, deleteCookie } from "cookies-next";
 import { addData, createNewCustomer } from "./firebaseMethods";
-import { adminAuth } from "./firebaseAdminConfig";
 import { collection, doc, getDoc, updateDoc, query, where, getDocs, DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 export const auth = getAuth(firebase_app);
 
-export async function signUp(email : string, password : string) {
-    let newCustUid: string;
-    return  createUserWithEmailAndPassword(auth, email, password)
-    .then((result) => {
-        newCustUid = result.user.uid;
-        return result.user.getIdToken()
-    })
-    .then((token) => {
-        setCookie('cookieKey', token, {maxAge: 60 * 6 * 24 })
-        return token
-    }).then((token) => {
-        // createNewCustomer({firstName: "", lastName: "", email: email, phone: "", notes: "",}, newCustUid)
-        return('success')
-    })
-    .catch((err) => {
-        console.log(err.code)
-        switch (err.code) {
-            case "auth/email-already-exists":
-                throw new Error ('That email is already in use.')
-            case "auth/weak-password":
-                throw new Error ('Password should be at least 6 characters')
-            default:
-                throw new Error ('Hmm, something went wrong, try again!')
-        }
-    })
-}
+// export async function signUp(email : string, password : string) {
+//     let newCustUid: string;
+//     return  createUserWithEmailAndPassword(auth, email, password)
+//     .then((result) => {
+//         newCustUid = result.user.uid;
+//         return result.user.getIdToken()
+//     })
+//     .then((token) => {
+//         setCookie('cookieKey', token, {maxAge: 60 * 6 * 24 })
+//         return token
+//     }).then((token) => {
+//         // createNewCustomer({firstName: "", lastName: "", email: email, phone: "", notes: "",}, newCustUid)
+//         return('success')
+//     })
+//     .catch((err) => {
+//         console.log(err.code)
+//         switch (err.code) {
+//             case "auth/email-already-exists":
+//                 throw new Error ('That email is already in use.')
+//             case "auth/weak-password":
+//                 throw new Error ('Password should be at least 6 characters')
+//             default:
+//                 throw new Error ('Hmm, something went wrong, try again!')
+//         }
+//     })
+// }
 
-export async function signUp2(email: string, password: string) {
+export async function signUp(email: string, password: string) {
     try {
         //Create new user in FB Auth
         const userData = await createUserWithEmailAndPassword(auth, email, password)
@@ -76,11 +75,10 @@ export async function signIn(email: string, password: string) {
 
     return signInWithEmailAndPassword(auth, email, password)
         .then((result) => {
-            result.user.refreshToken
             return result.user.getIdToken()
         })
         .then((token) => {
-            setCookie('cookieKey', token, {maxAge: 60 * 6 * 24 })
+            setCookie('cookieKey', token, {maxAge: 60 * 60 })
             return('success')
         })
         .catch((err) => {

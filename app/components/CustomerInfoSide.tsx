@@ -51,6 +51,8 @@ const CustomerInfoSide: FC<CustomerInfoSideProps> = ({customer, params}) => {
                     <input value={editData.email} name="email" onChange={handleChange} className='text-sm mb-2 p-2 border border-gray-300 rounded-md'/>
                     <h3 className='text-sm text-gray-700 opacity-60 pb-1'>Phone</h3>
                     <input value={editData.phone} name="phone" onChange={handleChange} className='text-sm mb-2 p-2 border border-gray-300 rounded-md'/>
+                    <h3 className='text-sm text-gray-700 opacity-60 pb-1'>Address</h3>
+                    <input value={editData.address} name="address" onChange={handleChange} className='text-sm mb-2 p-2 border border-gray-300 rounded-md'/>
                     <h3 className='text-sm text-gray-700 opacity-60 pb-1'>Notes</h3>
                     <input value={editData.notes} name="notes" onChange={handleChange} className='text-sm mb-2 p-2 border border-gray-300 rounded-md'/></>
                     :<>

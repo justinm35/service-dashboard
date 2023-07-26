@@ -1,11 +1,10 @@
 "use client"
-import { ArrowLongRightIcon, ArrowRightOnRectangleIcon, ArrowTopRightOnSquareIcon, CheckBadgeIcon, CheckIcon, LinkIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { ArrowLongRightIcon, LinkIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
-import { FC, useState } from 'react'
 
-interface UserTableItemProps {}
+interface CustomerTableItemProps {}
 
-const UserTableItem = ({client} : {client : IClient}) => {
+const CustomerTableItem = ({client} : {client : IClient}) => {
 
   return (
         <tr className="hover:bg-gray-50">
@@ -23,6 +22,11 @@ const UserTableItem = ({client} : {client : IClient}) => {
               <div className="font-medium text-gray-600">{client.phone}</div>
             </div>
           </td>
+          <td className="px-6 py-4font-normal text-gray-900">
+            <div className="text-sm">
+              <div className="font-medium text-gray-600">{client.address}</div>
+            </div>
+          </td>
           <td className="px-6 py-4">
           <div className="flex justify-end gap-4 hover:scale-110 transition">
               <Link href={`/dashboard/customer/${client.id}/equipment`}>
@@ -34,4 +38,4 @@ const UserTableItem = ({client} : {client : IClient}) => {
   )
 }
 
-export default UserTableItem
+export default CustomerTableItem
