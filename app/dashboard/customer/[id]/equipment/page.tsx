@@ -1,15 +1,14 @@
+'use client'
 
 import { CubeIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import {PlusIcon} from '@heroicons/react/24/solid'
-import { DocumentData, collection, doc, getDoc, getDocs } from 'firebase/firestore'
-import { db } from '@/app/(firebase)/firebaseConfig'
 import EquipmentTable from '@/app/components/customerTabs/EquipmentTable'
 import { fetchCollection } from '@/app/(firebase)/firebaseFetchMethods'
 
 interface EqipmentProps {params: {id: string}}
 
-const Eqipment = async ({params} : EqipmentProps) => {
+const Eqipment = ({params} : EqipmentProps) => {
 
   return fetchCollection(`Customers/${params?.id}/Equipment`)
     .then((resEquipmentData)=> {
@@ -25,7 +24,7 @@ const Eqipment = async ({params} : EqipmentProps) => {
         <PlusIcon className="w-6 h-6 mr-3"/>Add equipment</Link>
         </div>
         )
-      } 
+      }
   })
   .catch((err) => {
     console.log(err)

@@ -1,6 +1,4 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import admin from 'firebase-admin'
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 

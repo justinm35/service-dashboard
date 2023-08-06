@@ -1,4 +1,4 @@
-import admin from 'firebase-admin'
+import * as admin from 'firebase-admin';
 import {
   AppOptions,
   cert,
@@ -24,8 +24,6 @@ function createFirebaseAdminApp() {
   }
 }
 
-// adminAuth.setCustomUserClaims('justin.martin3501@gmail.com', { admin: true })
 const firebaseAdmin = createFirebaseAdminApp();
 export const adminAuth = getAuth(firebaseAdmin);
-
-
+export const dbAdmin = admin.firestore();

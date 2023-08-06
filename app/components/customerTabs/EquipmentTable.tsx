@@ -1,7 +1,5 @@
-import { db } from '@/app/(firebase)/firebaseConfig'
 import { PlusIcon } from '@heroicons/react/24/solid'
-import { format } from 'date-fns'
-import { DocumentData, doc, getDoc } from 'firebase/firestore'
+import { DocumentData } from 'firebase/firestore'
 import Link from 'next/link'
 import { FC } from 'react'
 import EquipmentTableItem from './EquipmentTableItem'
@@ -32,10 +30,10 @@ const EquipmentTable: FC<EquipmentTableProps> = ({equipmentData, params}) => {
         <thead>
           <tr>
             <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-              Equipment Data Id
+              Equipment Data
             </th>
             <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-              Serial Number 
+              Serial Number
             </th>
            <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               Service Date
@@ -50,12 +48,11 @@ const EquipmentTable: FC<EquipmentTableProps> = ({equipmentData, params}) => {
             {equipmentData.map((equipment) => {
                 return (
                   <>
-                  {/* @ts-expect-error Server Component */}
                   <EquipmentTableItem key={equipment.id} equipment={JSON.parse(JSON.stringify(equipment))}/>
                   </>
                 )
             })}
-       
+
         </tbody>
 
       </table>

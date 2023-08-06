@@ -1,3 +1,4 @@
+'use client'
 import {fetchDocumentById } from '@/app/(firebase)/firebaseFetchMethods'
 import CustomerInfoSide from '@/app/components/CustomerInfoSide'
 import CustomerNav from '@/app/components/CustomerNav'
@@ -6,21 +7,24 @@ import { DocumentData } from 'firebase/firestore'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
 import DocumentCounts from '../DocumentCounts'
+import { useEffect, useState } from 'react'
 
 interface layoutProps {
   children: React.ReactNode,
   params: {id: string}
 }
 
-const layout = async({children, params} : layoutProps) => {
-
-    let customer : DocumentData | undefined
-    await fetchDocumentById('Customers', params?.id)
+const layout = ({children, params} : layoutProps) => {
+  const [customer, setCustomer] = useState<DocumentData | undefined>()
+  useEffect(() => {
+    fetchDocumentById('Customers', params?.id)
     .then((customerData) => {
-      customer = customerData
+      setCustomer(customerData)
     }).catch((err)=> {
       toast.error(`Errror: ${JSON.stringify(err)}`)
     })
+  }, [])
+
   return (
   <div className='p-10 h-screen'>
     <Link href="/dashboard/customer" className='opacity-40 flex mb-6 items-center text-[14px] hover:text-indigo-500 hover:opacity-100'><ArrowLeftIcon className='w-4 h-4 mr-1'/>Back to the Customer Dashboard</Link>

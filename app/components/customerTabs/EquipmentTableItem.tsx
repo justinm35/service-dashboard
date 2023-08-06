@@ -11,14 +11,12 @@ interface EquipmentTableItemProps {
   equipment: any
 }
 
-const EquipmentTableItem = async ({equipment, key} : EquipmentTableItemProps) => {
-
-    const equipmentNameDocref = await getDoc(doc(db, "Products", equipment?.equipmentId))
+const EquipmentTableItem = ({equipment, key} : EquipmentTableItemProps) => {
 
   return (
     <tr key={equipment.id}>
     <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
-    {equipmentNameDocref.data()?.name}
+    {equipment.equipmentName}
     </th>
     <td className="border-t-0 px-6 font-bold text-gray-600 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
     {equipment.serialNum}
@@ -27,7 +25,7 @@ const EquipmentTableItem = async ({equipment, key} : EquipmentTableItemProps) =>
         {format(new Date(equipment.serviceDate.seconds * 1000), 'MMM d, yyyy')}
     </td>
     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-    {format(new Date(equipment.purchaseDate.seconds * 1000), 'MMM d, yyyy')}
+        {format(new Date(equipment.purchaseDate.seconds * 1000), 'MMM d, yyyy')}
     </td>
     </tr>
   )

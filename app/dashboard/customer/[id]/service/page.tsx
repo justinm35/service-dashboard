@@ -11,7 +11,8 @@ interface ServicesProps {
   params: {id: string}
 }
 
-const Services = async ({params}: ServicesProps) => {
+const Services =  ({params}: ServicesProps) => {
+
   return fetchCollection(`Customers/${params?.id}/ServiceHistory`)
     .then((serviceHistoryData)=> {
       if(serviceHistoryData && serviceHistoryData.length !== 0) {

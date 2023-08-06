@@ -25,6 +25,7 @@
     "flowbite": "^1.6.5",
     "flowbite-datepicker": "^1.2.2",
     "heroicons": "^2.0.18",
+    "net": "^1.0.2",
     "next": "^13.4.4",
     "next-firebase-auth": "^1.0.0-canary.19",
     "postcss": "8.4.23",
